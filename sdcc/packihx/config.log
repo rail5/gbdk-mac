@@ -1,0 +1,46 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:531: checking for gcc
+configure:644: checking whether the C compiler (gcc  ) works
+configure:660: gcc -o conftest    conftest.c  1>&5
+configure:657:1: warning: type specifier missing, defaults to 'int' [-Wimplicit-int]
+main(){return(0);}
+^
+1 warning generated.
+configure:686: checking whether the C compiler (gcc  ) is a cross-compiler
+configure:691: checking whether we are using GNU C
+configure:719: checking whether gcc accepts -g
+configure:757: checking size of char
+configure:777: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:768:1: warning: type specifier missing, defaults to 'int' [-Wimplicit-int]
+main()
+^
+configure:771:11: warning: implicitly declaring library function 'exit' with type 'void (int) __attribute__((noreturn))' [-Wimplicit-function-declaration]
+  if (!f) exit(1);
+          ^
+configure:771:11: note: include the header <stdlib.h> or explicitly provide a declaration for 'exit'
+configure:772:22: warning: format specifies type 'int' but the argument has type 'unsigned long' [-Wformat]
+  fprintf(f, "%d\n", sizeof(char));
+              ~~     ^~~~~~~~~~~~
+              %lu
+3 warnings generated.
+configure:797: checking size of short
+configure:837: checking size of int
+configure:877: checking size of long
+configure:917: checking size of long long
+configure:937: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:928:1: warning: type specifier missing, defaults to 'int' [-Wimplicit-int]
+main()
+^
+configure:931:11: warning: implicitly declaring library function 'exit' with type 'void (int) __attribute__((noreturn))' [-Wimplicit-function-declaration]
+  if (!f) exit(1);
+          ^
+configure:931:11: note: include the header <stdlib.h> or explicitly provide a declaration for 'exit'
+configure:932:22: warning: format specifies type 'int' but the argument has type 'unsigned long' [-Wformat]
+  fprintf(f, "%d\n", sizeof(long long));
+              ~~     ^~~~~~~~~~~~~~~~~
+              %lu
+3 warnings generated.
+configure:983: checking type name for byte
+configure:987: checking type name for word

@@ -1,0 +1,628 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.3.1 Mon Jan 15 17:21:30 2018
+                              4 
+                              5 ;--------------------------------------------------------
+                              6 	.module lcc193420
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _main
+                             12 ;--------------------------------------------------------
+                             13 ; special function registers
+                             14 ;--------------------------------------------------------
+                             15 ;--------------------------------------------------------
+                             16 ; special function bits 
+                             17 ;--------------------------------------------------------
+                             18 ;--------------------------------------------------------
+                             19 ; internal ram data
+                             20 ;--------------------------------------------------------
+                             21 	.area _DATA
+                             22 ;--------------------------------------------------------
+                             23 ; overlayable items in internal ram 
+                             24 ;--------------------------------------------------------
+                             25 	.area _OVERLAY
+                             26 ;--------------------------------------------------------
+                             27 ; indirectly addressable internal ram data
+                             28 ;--------------------------------------------------------
+                             29 	.area _ISEG
+                             30 ;--------------------------------------------------------
+                             31 ; bit data
+                             32 ;--------------------------------------------------------
+                             33 	.area _BSEG
+                             34 ;--------------------------------------------------------
+                             35 ; external ram data
+                             36 ;--------------------------------------------------------
+                             37 	.area _XSEG
+                             38 ;--------------------------------------------------------
+                             39 ; global & static initialisations
+                             40 ;--------------------------------------------------------
+                             41 	.area _GSINIT
+                             42 	.area _GSFINAL
+                             43 	.area _GSINIT
+                             44 ;--------------------------------------------------------
+                             45 ; Home
+                             46 ;--------------------------------------------------------
+                             47 	.area _HOME
+                             48 	.area _CODE
+                             49 ;--------------------------------------------------------
+                             50 ; code
+                             51 ;--------------------------------------------------------
+                             52 	.area _CODE
+                             53 ;	filltest.c 7
+                             54 ;	genLabel
+                             55 ;	genFunction
+                             56 ;	---------------------------------
+                             57 ; Function main
+                             58 ; ---------------------------------
+   0000                      59 ___main_start:
+   0000                      60 _main:
+   0000 E8 F4                61 	lda	sp,-12(sp)
+                             62 ;	filltest.c 10
+                             63 ;	genAssign
+                             64 ;	AOP_STK for _main_c_1_1
+   0002 F8 09                65 	lda	hl,9(sp)
+   0004 36 00                66 	ld	(hl),#0x00
+                             67 ;	filltest.c 12
+                             68 ;	genAssign
+                             69 ;	AOP_STK for _main_a_1_1
+   0006 23                   70 	inc	hl
+   0007 23                   71 	inc	hl
+   0008 36 00                72 	ld	(hl),#0x00
+                             73 ;	genLabel
+   000A                      74 00107$:
+                             75 ;	genCmpGt
+                             76 ;	AOP_STK for _main_a_1_1
+   000A 3E 0F                77 	ld	a,#0x0F
+   000C F8 0B                78 	lda	hl,11(sp)
+   000E 96                   79 	sub	a,(hl)
+   000F DA B6 00             80 	jp	c,00110$
+                             81 ;	filltest.c 13
+                             82 ;	genAssign
+                             83 ;	AOP_STK for _main_b_1_1
+   0012 2B                   84 	dec	hl
+   0013 36 00                85 	ld	(hl),#0x00
+                             86 ;	genLabel
+   0015                      87 00103$:
+                             88 ;	genCmpGt
+                             89 ;	AOP_STK for _main_b_1_1
+                             90 ;	AOP_STK for _main_sloc1_1_0
+   0015 3E 0F                91 	ld	a,#0x0F
+   0017 F8 0A                92 	lda	hl,10(sp)
+   0019 96                   93 	sub	a,(hl)
+   001A 3E 00                94 	ld	a,#0x00
+   001C 17                   95 	rla
+   001D F8 05                96 	lda	hl,5(sp)
+   001F 77                   97 	ld	(hl),a
+                             98 ;	genIfx
+                             99 ;	AOP_STK for _main_sloc1_1_0
+   0020 AF                  100 	xor	a,a
+   0021 B6                  101 	or	a,(hl)
+   0022 C2 B0 00            102 	jp	nz,00109$
+                            103 ;	filltest.c 14
+                            104 ;	genIpush
+                            105 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                            106 ;	AOP_STK for _main_a_1_1
+   0025 F8 0B               107 	lda	hl,11(sp)
+   0027 7E                  108 	ld	a,(hl)
+   0028 F5                  109 	push	af
+   0029 33                  110 	inc	sp
+                            111 ;	genIpush
+                            112 ;	AOP_STK for _main_b_1_1
+   002A 2B                  113 	dec	hl
+   002B 7E                  114 	ld	a,(hl)
+   002C F5                  115 	push	af
+   002D 33                  116 	inc	sp
+                            117 ;	genCall
+   002E CD 00 00            118 	call	_gotogxy
+   0031 E8 02               119 	lda	sp,2(sp)
+                            120 ;	filltest.c 15
+                            121 ;	genRightShift
+                            122 ;	AOP_STK for _main_a_1_1
+                            123 ;	AOP_STK for _main_sloc0_1_0
+   0033 F8 0B               124 	lda	hl,11(sp)
+   0035 7E                  125 	ld	a,(hl)
+   0036 CB 3F               126 	srl	a
+   0038 CB 3F               127 	srl	a
+   003A F8 06               128 	lda	hl,6(sp)
+   003C 77                  129 	ld	(hl),a
+                            130 ;	genAssign
+                            131 ;	AOP_STK for _main_sloc0_1_0
+                            132 ;	AOP_STK for _main_d_1_1
+   003D 2A                  133 	ld	a,(hl+)
+   003E 23                  134 	inc	hl
+                            135 ;	filltest.c 16
+                            136 ;	genRightShift
+                            137 ;	AOP_STK for _main_b_1_1
+                            138 ;	AOP_STK for _main_e_1_1
+   003F 22                  139 	ld	(hl+),a
+   0040 23                  140 	inc	hl
+   0041 7E                  141 	ld	a,(hl)
+   0042 CB 3F               142 	srl	a
+   0044 CB 3F               143 	srl	a
+   0046 F8 07               144 	lda	hl,7(sp)
+                            145 ;	genAssign
+                            146 ;	AOP_STK for _main_e_1_1
+   0048 77                  147 	ld      (hl),a
+   0049 47                  148 	ld      b,a
+                            149 ;	filltest.c 17
+                            150 ;	genCmpEq
+                            151 ;	AOP_STK for _main_d_1_1
+                            152 ; genCmpEq: left 1, right 1, result 1
+   004A 23                  153 	inc	hl
+   004B 7E                  154 	ld	a,(hl)
+   004C B8                  155 	cp	b
+   004D C2 54 00            156 	jp	nz,00136$
+   0050 3E 01               157 	ld	a,#0x01
+   0052 18 01               158 	jr	00137$
+   0054                     159 00136$:
+   0054 AF                  160 	xor	a,a
+   0055                     161 00137$:
+                            162 ;	genIfx
+   0055 B7                  163 	or	a,a
+   0056 CA 60 00            164 	jp	z,00102$
+                            165 ;	filltest.c 18
+                            166 ;	genMinus
+   0059 3E 03               167 	ld	a,#0x03
+   005B 90                  168 	sub	a,b
+   005C 4F                  169 	ld	c,a
+                            170 ;	genAssign
+                            171 ;	AOP_STK for _main_d_1_1
+   005D F8 08               172 	lda	hl,8(sp)
+   005F 71                  173 	ld	(hl),c
+                            174 ;	genLabel
+   0060                     175 00102$:
+                            176 ;	filltest.c 20
+                            177 ;	genIpush
+                            178 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0060 C5                  179 	push	bc
+   0061 3E 00               180 	ld	a,#0x00
+   0063 F5                  181 	push	af
+   0064 33                  182 	inc	sp
+                            183 ;	genIpush
+   0065 78                  184 	ld	a,b
+   0066 F5                  185 	push	af
+   0067 33                  186 	inc	sp
+                            187 ;	genIpush
+                            188 ;	AOP_STK for _main_d_1_1
+   0068 F8 0C               189 	lda	hl,12(sp)
+   006A 7E                  190 	ld	a,(hl)
+   006B F5                  191 	push	af
+   006C 33                  192 	inc	sp
+                            193 ;	genCall
+   006D CD 00 00            194 	call	_color
+   0070 E8 03               195 	lda	sp,3(sp)
+   0072 C1                  196 	pop	bc
+                            197 ;	filltest.c 21
+                            198 ;	genAssign
+                            199 ;	AOP_STK for _main_c_1_1
+                            200 ;	AOP_STK for _main_sloc2_1_0
+   0073 F8 09               201 	lda	hl,9(sp)
+   0075 7E                  202 	ld	a,(hl)
+   0076 F8 04               203 	lda	hl,4(sp)
+   0078 77                  204 	ld	(hl),a
+                            205 ;	genPlus
+                            206 ;	AOP_STK for _main_c_1_1
+                            207 ;	AOP_STK for _main_sloc3_1_0
+                            208 ;	genPlusIncr
+                            209 ;	Can't optimise plus by inc, falling back to the normal way
+   0079 F8 09               210 	lda	hl,9(sp)
+   007B 7E                  211 	ld	a,(hl)
+   007C C6 01               212 	add	a,#0x01
+   007E F8 03               213 	lda	hl,3(sp)
+                            214 ;	genAssign
+                            215 ;	AOP_STK for _main_sloc3_1_0
+                            216 ;	AOP_STK for _main_c_1_1
+   0080 77                  217 	ld      (hl),a
+                            218 ; Removed redundent load
+   0081 F8 09               219 	lda	hl,9(sp)
+   0083 77                  220 	ld	(hl),a
+                            221 ;	genCast
+                            222 ;	AOP_STK for _main_sloc2_1_0
+                            223 ;	AOP_STK for _main_sloc4_1_0
+   0084 F8 04               224 	lda	hl,4(sp)
+   0086 7E                  225 	ld	a,(hl)
+   0087 F8 01               226 	lda	hl,1(sp)
+   0089 77                  227 	ld	(hl),a
+   008A F8 04               228 	lda	hl,4(sp)
+   008C 7E                  229 	ld	a,(hl)
+   008D 17                  230 	rla	
+   008E 9F                  231 	sbc	a,a
+   008F 2B                  232 	dec	hl
+   0090 2B                  233 	dec	hl
+   0091 77                  234 	ld	(hl),a
+                            235 ;	genIpush
+                            236 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0092 C5                  237 	push	bc
+                            238 ;	AOP_STK for _main_sloc4_1_0
+   0093 2B                  239 	dec	hl
+   0094 2A                  240 	ld	a,(hl+)
+   0095 66                  241 	ld	h,(hl)
+   0096 6F                  242 	ld	l,a
+   0097 E5                  243 	push	hl
+                            244 ;	genIpush
+   0098 21 E3 01            245 	ld	hl,#__str_0
+   009B E5                  246 	push	hl
+                            247 ;	genCall
+   009C CD 00 00            248 	call	_gprintf
+   009F E8 04               249 	lda	sp,4(sp)
+   00A1 C1                  250 	pop	bc
+                            251 ;	filltest.c 13
+                            252 ;	genPlus
+                            253 ;	AOP_STK for _main_b_1_1
+                            254 ;	AOP_STK for _main_sloc5_1_0
+                            255 ;	genPlusIncr
+                            256 ;	Can't optimise plus by inc, falling back to the normal way
+   00A2 F8 0A               257 	lda	hl,10(sp)
+   00A4 7E                  258 	ld	a,(hl)
+   00A5 C6 01               259 	add	a,#0x01
+   00A7 F8 00               260 	lda	hl,0(sp)
+                            261 ;	genAssign
+                            262 ;	AOP_STK for _main_sloc5_1_0
+                            263 ;	AOP_STK for _main_b_1_1
+   00A9 77                  264 	ld      (hl),a
+                            265 ; Removed redundent load
+   00AA F8 0A               266 	lda	hl,10(sp)
+   00AC 77                  267 	ld	(hl),a
+                            268 ;	genGoto
+   00AD C3 15 00            269 	jp	00103$
+                            270 ;	genLabel
+   00B0                     271 00109$:
+                            272 ;	filltest.c 12
+                            273 ;	genPlus
+                            274 ;	AOP_STK for _main_a_1_1
+                            275 ;	genPlusIncr
+   00B0 F8 0B               276 	lda	hl,11(sp)
+   00B2 34                  277 	inc	(hl)
+                            278 ;	genGoto
+   00B3 C3 0A 00            279 	jp	00107$
+                            280 ;	genLabel
+   00B6                     281 00110$:
+                            282 ;	filltest.c 26
+                            283 ;	genIpush
+                            284 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00B6 21 00 00            285 	ld	hl,#0x0000
+   00B9 E5                  286 	push	hl
+                            287 ;	genIpush
+   00BA 3E 01               288 	ld	a,#0x01
+   00BC F5                  289 	push	af
+   00BD 33                  290 	inc	sp
+                            291 ;	genCall
+   00BE CD 00 00            292 	call	_color
+   00C1 E8 03               293 	lda	sp,3(sp)
+                            294 ;	filltest.c 27
+                            295 ;	genIpush
+                            296 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00C3 21 0F 01            297 	ld	hl,#0x010F
+   00C6 E5                  298 	push	hl
+                            299 ;	genIpush
+   00C7 21 8C 14            300 	ld	hl,#0x148C
+   00CA E5                  301 	push	hl
+                            302 ;	genCall
+   00CB CD 00 00            303 	call	_circle
+   00CE E8 04               304 	lda	sp,4(sp)
+                            305 ;	filltest.c 28
+                            306 ;	genIpush
+                            307 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00D0 21 00 00            308 	ld	hl,#0x0000
+   00D3 E5                  309 	push	hl
+                            310 ;	genIpush
+   00D4 3E 03               311 	ld	a,#0x03
+   00D6 F5                  312 	push	af
+   00D7 33                  313 	inc	sp
+                            314 ;	genCall
+   00D8 CD 00 00            315 	call	_color
+   00DB E8 03               316 	lda	sp,3(sp)
+                            317 ;	filltest.c 29
+                            318 ;	genIpush
+                            319 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00DD 21 0A 00            320 	ld	hl,#0x000A
+   00E0 E5                  321 	push	hl
+                            322 ;	genIpush
+   00E1 21 8C 14            323 	ld	hl,#0x148C
+   00E4 E5                  324 	push	hl
+                            325 ;	genCall
+   00E5 CD 00 00            326 	call	_circle
+   00E8 E8 04               327 	lda	sp,4(sp)
+                            328 ;	filltest.c 30
+                            329 ;	genIpush
+                            330 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00EA 21 00 02            331 	ld	hl,#0x0200
+   00ED E5                  332 	push	hl
+                            333 ;	genIpush
+   00EE 3E 02               334 	ld	a,#0x02
+   00F0 F5                  335 	push	af
+   00F1 33                  336 	inc	sp
+                            337 ;	genCall
+   00F2 CD 00 00            338 	call	_color
+   00F5 E8 03               339 	lda	sp,3(sp)
+                            340 ;	filltest.c 31
+                            341 ;	genIpush
+                            342 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00F7 21 1E 01            343 	ld	hl,#0x011E
+   00FA E5                  344 	push	hl
+                            345 ;	genIpush
+   00FB 21 78 28            346 	ld	hl,#0x2878
+   00FE E5                  347 	push	hl
+                            348 ;	genCall
+   00FF CD 00 00            349 	call	_circle
+   0102 E8 04               350 	lda	sp,4(sp)
+                            351 ;	filltest.c 32
+                            352 ;	genIpush
+                            353 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0104 21 9F 8F            354 	ld	hl,#0x8F9F
+   0107 E5                  355 	push	hl
+                            356 ;	genIpush
+   0108 21 00 00            357 	ld	hl,#0x0000
+   010B E5                  358 	push	hl
+                            359 ;	genCall
+   010C CD 00 00            360 	call	_line
+   010F E8 04               361 	lda	sp,4(sp)
+                            362 ;	filltest.c 33
+                            363 ;	genIpush
+                            364 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0111 21 01 00            365 	ld	hl,#0x0001
+   0114 E5                  366 	push	hl
+                            367 ;	genIpush
+   0115 3E 03               368 	ld	a,#0x03
+   0117 F5                  369 	push	af
+   0118 33                  370 	inc	sp
+                            371 ;	genCall
+   0119 CD 00 00            372 	call	_color
+   011C E8 03               373 	lda	sp,3(sp)
+                            374 ;	filltest.c 34
+                            375 ;	genIpush
+                            376 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   011E 21 8F 00            377 	ld	hl,#0x008F
+   0121 E5                  378 	push	hl
+                            379 ;	genIpush
+   0122 21 82 28            380 	ld	hl,#0x2882
+   0125 E5                  381 	push	hl
+                            382 ;	genIpush
+   0126 3E 00               383 	ld	a,#0x00
+   0128 F5                  384 	push	af
+   0129 33                  385 	inc	sp
+                            386 ;	genCall
+   012A CD 00 00            387 	call	_box
+   012D E8 05               388 	lda	sp,5(sp)
+                            389 ;	filltest.c 35
+                            390 ;	genIpush
+                            391 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   012F 21 8F 01            392 	ld	hl,#0x018F
+   0132 E5                  393 	push	hl
+                            394 ;	genIpush
+   0133 21 82 5A            395 	ld	hl,#0x5A82
+   0136 E5                  396 	push	hl
+                            397 ;	genIpush
+   0137 3E 32               398 	ld	a,#0x32
+   0139 F5                  399 	push	af
+   013A 33                  400 	inc	sp
+                            401 ;	genCall
+   013B CD 00 00            402 	call	_box
+   013E E8 05               403 	lda	sp,5(sp)
+                            404 ;	filltest.c 38
+                            405 ;	genAssign
+                            406 ;	AOP_STK for _main_c_1_1
+   0140 F8 09               407 	lda	hl,9(sp)
+   0142 36 00               408 	ld	(hl),#0x00
+                            409 ;	genLabel
+   0144                     410 00119$:
+                            411 ;	genCmpGt
+                            412 ;	AOP_STK for _main_c_1_1
+   0144 3E 8F               413 	ld	a,#0x8F
+   0146 F8 09               414 	lda	hl,9(sp)
+   0148 96                  415 	sub	a,(hl)
+   0149 DA E0 01            416 	jp	c,00123$
+                            417 ;	filltest.c 39
+                            418 ;	genAssign
+                            419 ;	AOP_STK for _main_b_1_1
+   014C 23                  420 	inc	hl
+   014D 36 00               421 	ld	(hl),#0x00
+                            422 ;	genLabel
+   014F                     423 00115$:
+                            424 ;	genCmpGt
+                            425 ;	AOP_STK for _main_b_1_1
+   014F 3E 8E               426 	ld	a,#0x8E
+   0151 F8 0A               427 	lda	hl,10(sp)
+   0153 96                  428 	sub	a,(hl)
+   0154 3E 00               429 	ld	a,#0x00
+   0156 17                  430 	rla
+   0157 4F                  431 	ld	c,a
+                            432 ;	genIfx
+   0158 AF                  433 	xor	a,a
+   0159 B1                  434 	or	a,c
+   015A C2 CD 01            435 	jp	nz,00118$
+                            436 ;	filltest.c 40
+                            437 ;	genAssign
+                            438 ;	AOP_STK for _main_a_1_1
+   015D 23                  439 	inc	hl
+   015E 36 00               440 	ld	(hl),#0x00
+                            441 ;	genLabel
+   0160                     442 00111$:
+                            443 ;	genCmpGt
+                            444 ;	AOP_STK for _main_a_1_1
+   0160 3E 9F               445 	ld	a,#0x9F
+   0162 F8 0B               446 	lda	hl,11(sp)
+   0164 96                  447 	sub	a,(hl)
+   0165 3E 00               448 	ld	a,#0x00
+   0167 17                  449 	rla
+   0168 47                  450 	ld	b,a
+                            451 ;	genIfx
+   0169 AF                  452 	xor	a,a
+   016A B0                  453 	or	a,b
+   016B C2 B5 01            454 	jp	nz,00114$
+                            455 ;	filltest.c 41
+                            456 ;	genPlus
+                            457 ;	AOP_STK for _main_b_1_1
+                            458 ;	AOP_STK for _main_sloc5_1_0
+                            459 ;	genPlusIncr
+                            460 ;	Can't optimise plus by inc, falling back to the normal way
+   016E 2B                  461 	dec	hl
+   016F 7E                  462 	ld	a,(hl)
+   0170 C6 01               463 	add	a,#0x01
+   0172 F8 00               464 	lda	hl,0(sp)
+   0174 77                  465 	ld	(hl),a
+                            466 ;	genIpush
+                            467 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0175 C5                  468 	push	bc
+                            469 ;	AOP_STK for _main_sloc5_1_0
+   0176 7E                  470 	ld	a,(hl)
+   0177 F5                  471 	push	af
+   0178 33                  472 	inc	sp
+                            473 ;	genIpush
+                            474 ;	AOP_STK for _main_a_1_1
+   0179 F8 0E               475 	lda	hl,14(sp)
+   017B 7E                  476 	ld	a,(hl)
+   017C F5                  477 	push	af
+   017D 33                  478 	inc	sp
+                            479 ;	genCall
+   017E CD 00 00            480 	call	_getpix
+                            481 ;	AOP_STK for _main_sloc4_1_0
+   0181 F8 05               482 	lda	hl,5(sp)
+   0183 73                  483 	ld	(hl),e
+   0184 E8 02               484 	lda	sp,2(sp)
+   0186 C1                  485 	pop	bc
+                            486 ;	genIpush
+                            487 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0187 C5                  488 	push	bc
+   0188 21 00 00            489 	ld	hl,#0x0000
+   018B E5                  490 	push	hl
+                            491 ;	genIpush
+                            492 ;	AOP_STK for _main_sloc4_1_0
+   018C F8 05               493 	lda	hl,5(sp)
+   018E 7E                  494 	ld	a,(hl)
+   018F F5                  495 	push	af
+   0190 33                  496 	inc	sp
+                            497 ;	genCall
+   0191 CD 00 00            498 	call	_color
+   0194 E8 03               499 	lda	sp,3(sp)
+   0196 C1                  500 	pop	bc
+                            501 ;	filltest.c 42
+                            502 ;	genIpush
+                            503 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0197 C5                  504 	push	bc
+                            505 ;	AOP_STK for _main_b_1_1
+   0198 F8 0C               506 	lda	hl,12(sp)
+   019A 7E                  507 	ld	a,(hl)
+   019B F5                  508 	push	af
+   019C 33                  509 	inc	sp
+                            510 ;	genIpush
+                            511 ;	AOP_STK for _main_a_1_1
+   019D 23                  512 	inc	hl
+   019E 7E                  513 	ld	a,(hl)
+   019F F5                  514 	push	af
+   01A0 33                  515 	inc	sp
+                            516 ;	genCall
+   01A1 CD 00 00            517 	call	_plot_point
+   01A4 E8 02               518 	lda	sp,2(sp)
+   01A6 C1                  519 	pop	bc
+                            520 ;	filltest.c 40
+                            521 ;	genPlus
+                            522 ;	AOP_STK for _main_a_1_1
+                            523 ;	AOP_STK for _main_sloc3_1_0
+                            524 ;	genPlusIncr
+                            525 ;	Can't optimise plus by inc, falling back to the normal way
+   01A7 F8 0B               526 	lda	hl,11(sp)
+   01A9 7E                  527 	ld	a,(hl)
+   01AA C6 01               528 	add	a,#0x01
+   01AC F8 03               529 	lda	hl,3(sp)
+                            530 ;	genAssign
+                            531 ;	AOP_STK for _main_sloc3_1_0
+                            532 ;	AOP_STK for _main_a_1_1
+   01AE 77                  533 	ld      (hl),a
+                            534 ; Removed redundent load
+   01AF F8 0B               535 	lda	hl,11(sp)
+   01B1 77                  536 	ld	(hl),a
+                            537 ;	genGoto
+   01B2 C3 60 01            538 	jp	00111$
+                            539 ;	genLabel
+   01B5                     540 00114$:
+                            541 ;	filltest.c 44
+                            542 ;	genIpush
+                            543 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   01B5 C5                  544 	push	bc
+   01B6 21 00 00            545 	ld	hl,#0x0000
+   01B9 E5                  546 	push	hl
+                            547 ;	genIpush
+   01BA 3E 00               548 	ld	a,#0x00
+   01BC F5                  549 	push	af
+   01BD 33                  550 	inc	sp
+                            551 ;	genCall
+   01BE CD 00 00            552 	call	_color
+   01C1 E8 03               553 	lda	sp,3(sp)
+   01C3 E1                  554 	pop	hl
+   01C4 4D                  555 	ld	c,l
+                            556 ;	filltest.c 39
+                            557 ;	genPlus
+                            558 ;	AOP_STK for _main_b_1_1
+                            559 ;	genPlusIncr
+   01C5 F8 0A               560 	lda	hl,10(sp)
+   01C7 46                  561 	ld	b,(hl)
+   01C8 04                  562 	inc	b
+                            563 ;	genAssign
+                            564 ;	AOP_STK for _main_b_1_1
+   01C9 70                  565 	ld	(hl),b
+                            566 ;	genGoto
+   01CA C3 4F 01            567 	jp	00115$
+                            568 ;	genLabel
+   01CD                     569 00118$:
+                            570 ;	filltest.c 46
+                            571 ;	genIpush
+                            572 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   01CD 21 9F 8F            573 	ld	hl,#0x8F9F
+   01D0 E5                  574 	push	hl
+                            575 ;	genIpush
+   01D1 21 00 8F            576 	ld	hl,#0x8F00
+   01D4 E5                  577 	push	hl
+                            578 ;	genCall
+   01D5 CD 00 00            579 	call	_line
+   01D8 E8 04               580 	lda	sp,4(sp)
+                            581 ;	filltest.c 38
+                            582 ;	genPlus
+                            583 ;	AOP_STK for _main_c_1_1
+                            584 ;	genPlusIncr
+   01DA F8 09               585 	lda	hl,9(sp)
+   01DC 34                  586 	inc	(hl)
+                            587 ;	genGoto
+   01DD C3 44 01            588 	jp	00119$
+                            589 ;	genLabel
+   01E0                     590 00123$:
+                            591 ;	genEndFunction
+   01E0 E8 0C               592 	lda	sp,12(sp)
+   01E2 C9                  593 	ret
+   01E3                     594 ___main_end:
+   01E3                     595 __str_0:
+   01E3 25 63               596 	.ascii "%c"
+   01E5 00                  597 	.db 0x00
+                            598 	.area _CODE
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
+
+Symbol Table
+
+  0 ___main_end                        01E3 R
+  0 ___main_start                      0000 R
+  0 __str_0                            01E3 R
+    _box                               **** GX
+    _circle                            **** GX
+    _color                             **** GX
+    _getpix                            **** GX
+    _gotogxy                           **** GX
+    _gprintf                           **** GX
+    _line                              **** GX
+  0 _main                              0000 GR
+    _plot_point                        **** GX
+
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
+
+Area Table
+
+   0 _CODE                              size  1E6   flags 0
+   1 _DATA                              size    0   flags 0
+   2 _OVERLAY                           size    0   flags 0
+   3 _ISEG                              size    0   flags 0
+   4 _BSEG                              size    0   flags 0
+   5 _XSEG                              size    0   flags 0
+   6 _GSINIT                            size    0   flags 0
+   7 _GSFINAL                           size    0   flags 0
+   8 _HOME                              size    0   flags 0

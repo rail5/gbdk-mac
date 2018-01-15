@@ -1,0 +1,398 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:556: checking for mawk
+configure:556: checking for gawk
+configure:556: checking for nawk
+configure:556: checking for awk
+configure:587: checking version of the package
+configure:651: checking for gcc
+configure:764: checking whether the C compiler (gcc  ) works
+configure:780: gcc -o conftest    conftest.c  1>&5
+configure:777:1: warning: type specifier missing, defaults to 'int' [-Wimplicit-int]
+main(){return(0);}
+^
+1 warning generated.
+configure:806: checking whether the C compiler (gcc  ) is a cross-compiler
+configure:811: checking whether we are using GNU C
+configure:820: gcc -E conftest.c
+configure:839: checking whether gcc accepts -g
+configure:875: checking for c++
+configure:907: checking whether the C++ compiler (g++  ) works
+configure:923: g++ -o conftest    conftest.C  1>&5
+configure:949: checking whether the C++ compiler (g++  ) is a cross-compiler
+configure:954: checking whether we are using GNU C++
+configure:963: g++ -E conftest.C
+configure:982: checking whether g++ accepts -g
+configure:1014: checking how to run the C preprocessor
+configure:1035: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1124: checking for a BSD compatible install
+configure:1179: checking for ranlib
+configure:1209: checking for flex
+configure:1243: checking for yywrap in -lfl
+configure:1262: gcc -o conftest -g -O2   conftest.c -lfl   1>&5
+ld: library not found for -lfl
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+configure: failed program was:
+#line 1251 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char yywrap();
+
+int main() {
+yywrap()
+; return 0; }
+configure:1287: checking for bison
+configure:1317: checking for autoconf
+configure:1347: checking for strip
+configure:1377: checking for as
+configure:1407: checking for cp
+configure:1457: checking for ANSI C header files
+configure:1470: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1537: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1532:67: warning: implicitly declaring library function 'exit' with type 'void (int) __attribute__((noreturn))' [-Wimplicit-function-declaration]
+if (XOR (islower (i), ISLOWER (i)) || toupper (i) != TOUPPER (i)) exit(2);
+                                                                  ^
+configure:1532:67: note: include the header <stdlib.h> or explicitly provide a declaration for 'exit'
+1 warning generated.
+configure:1564: checking for getopt.h
+configure:1574: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1604: checking for unistd.h
+configure:1614: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1644: checking for endian.h
+configure:1654: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1650:10: fatal error: 'endian.h' file not found
+#include <endian.h>
+         ^~~~~~~~~~
+1 error generated.
+configure: failed program was:
+#line 1649 "configure"
+#include "confdefs.h"
+#include <endian.h>
+configure:1684: checking for machine/endian.h
+configure:1694: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1724: checking for malloc.h
+configure:1734: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1730:10: fatal error: 'malloc.h' file not found
+#include <malloc.h>
+         ^~~~~~~~~~
+1 error generated.
+configure: failed program was:
+#line 1729 "configure"
+#include "confdefs.h"
+#include <malloc.h>
+configure:1764: checking for sys/isa_defs.h
+configure:1774: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1770:10: fatal error: 'sys/isa_defs.h' file not found
+#include <sys/isa_defs.h>
+         ^~~~~~~~~~~~~~~~
+1 error generated.
+configure: failed program was:
+#line 1769 "configure"
+#include "confdefs.h"
+#include <sys/isa_defs.h>
+configure:1804: checking for sys/socket.h
+configure:1814: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1845: checking for dirent.h that defines DIR
+configure:1858: gcc -c -g -O2  conftest.c 1>&5
+configure:1883: checking for opendir in -ldir
+configure:1902: gcc -o conftest -g -O2   conftest.c -ldir   1>&5
+ld: library not found for -ldir
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+configure: failed program was:
+#line 1891 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char opendir();
+
+int main() {
+opendir()
+; return 0; }
+configure:1969: checking which header file defines FD_ macros
+configure:2087: checking for strlen
+configure:2115: gcc -o conftest -g -O2   conftest.c  1>&5
+In file included from configure:2092:
+./confdefs.h:15:9: warning: 'FD_HEADER_OK' macro redefined [-Wmacro-redefined]
+#define FD_HEADER_OK 1
+        ^
+./confdefs.h:12:9: note: previous definition is here
+#define FD_HEADER_OK 0
+        ^
+configure:2099:6: warning: incompatible redeclaration of library function 'strlen' [-Wincompatible-library-redeclaration]
+char strlen();
+     ^
+configure:2099:6: note: 'strlen' is a builtin with type 'unsigned long (const char *)'
+2 warnings generated.
+configure:2087: checking for strcpy
+configure:2115: gcc -o conftest -g -O2   conftest.c  1>&5
+In file included from configure:2092:
+./confdefs.h:15:9: warning: 'FD_HEADER_OK' macro redefined [-Wmacro-redefined]
+#define FD_HEADER_OK 1
+        ^
+./confdefs.h:12:9: note: previous definition is here
+#define FD_HEADER_OK 0
+        ^
+configure:2099:6: warning: incompatible redeclaration of library function 'strcpy' [-Wincompatible-library-redeclaration]
+char strcpy();
+     ^
+configure:2099:6: note: 'strcpy' is a builtin with type 'char *(char *, const char *)'
+2 warnings generated.
+configure:2087: checking for strcat
+configure:2115: gcc -o conftest -g -O2   conftest.c  1>&5
+In file included from configure:2092:
+./confdefs.h:15:9: warning: 'FD_HEADER_OK' macro redefined [-Wmacro-redefined]
+#define FD_HEADER_OK 1
+        ^
+./confdefs.h:12:9: note: previous definition is here
+#define FD_HEADER_OK 0
+        ^
+configure:2099:6: warning: incompatible redeclaration of library function 'strcat' [-Wincompatible-library-redeclaration]
+char strcat();
+     ^
+configure:2099:6: note: 'strcat' is a builtin with type 'char *(char *, const char *)'
+2 warnings generated.
+configure:2087: checking for strstr
+configure:2115: gcc -o conftest -g -O2   conftest.c  1>&5
+In file included from configure:2092:
+./confdefs.h:15:9: warning: 'FD_HEADER_OK' macro redefined [-Wmacro-redefined]
+#define FD_HEADER_OK 1
+        ^
+./confdefs.h:12:9: note: previous definition is here
+#define FD_HEADER_OK 0
+        ^
+configure:2099:6: warning: incompatible redeclaration of library function 'strstr' [-Wincompatible-library-redeclaration]
+char strstr();
+     ^
+configure:2099:6: note: 'strstr' is a builtin with type 'char *(const char *, const char *)'
+2 warnings generated.
+configure:2087: checking for strcmp
+configure:2115: gcc -o conftest -g -O2   conftest.c  1>&5
+In file included from configure:2092:
+./confdefs.h:15:9: warning: 'FD_HEADER_OK' macro redefined [-Wmacro-redefined]
+#define FD_HEADER_OK 1
+        ^
+./confdefs.h:12:9: note: previous definition is here
+#define FD_HEADER_OK 0
+        ^
+configure:2099:6: warning: incompatible redeclaration of library function 'strcmp' [-Wincompatible-library-redeclaration]
+char strcmp();
+     ^
+configure:2099:6: note: 'strcmp' is a builtin with type 'int (const char *, const char *)'
+2 warnings generated.
+configure:2087: checking for strerror
+configure:2115: gcc -o conftest -g -O2   conftest.c  1>&5
+In file included from configure:2092:
+./confdefs.h:15:9: warning: 'FD_HEADER_OK' macro redefined [-Wmacro-redefined]
+#define FD_HEADER_OK 1
+        ^
+./confdefs.h:12:9: note: previous definition is here
+#define FD_HEADER_OK 0
+        ^
+configure:2099:6: warning: incompatible redeclaration of library function 'strerror' [-Wincompatible-library-redeclaration]
+char strerror();
+     ^
+configure:2099:6: note: 'strerror' is a builtin with type 'char *(int)'
+2 warnings generated.
+configure:2087: checking for strtok
+configure:2115: gcc -o conftest -g -O2   conftest.c  1>&5
+In file included from configure:2092:
+./confdefs.h:15:9: warning: 'FD_HEADER_OK' macro redefined [-Wmacro-redefined]
+#define FD_HEADER_OK 1
+        ^
+./confdefs.h:12:9: note: previous definition is here
+#define FD_HEADER_OK 0
+        ^
+configure:2099:6: warning: incompatible redeclaration of library function 'strtok' [-Wincompatible-library-redeclaration]
+char strtok();
+     ^
+configure:2099:6: note: 'strtok' is a builtin with type 'char *(char *, const char *)'
+2 warnings generated.
+configure:2087: checking for strdup
+configure:2115: gcc -o conftest -g -O2   conftest.c  1>&5
+In file included from configure:2092:
+./confdefs.h:15:9: warning: 'FD_HEADER_OK' macro redefined [-Wmacro-redefined]
+#define FD_HEADER_OK 1
+        ^
+./confdefs.h:12:9: note: previous definition is here
+#define FD_HEADER_OK 0
+        ^
+configure:2099:6: warning: incompatible redeclaration of library function 'strdup' [-Wincompatible-library-redeclaration]
+char strdup();
+     ^
+configure:2099:6: note: 'strdup' is a builtin with type 'char *(const char *)'
+2 warnings generated.
+configure:2142: checking for strchr
+configure:2170: gcc -o conftest -g -O2   conftest.c  1>&5
+In file included from configure:2147:
+./confdefs.h:15:9: warning: 'FD_HEADER_OK' macro redefined [-Wmacro-redefined]
+#define FD_HEADER_OK 1
+        ^
+./confdefs.h:12:9: note: previous definition is here
+#define FD_HEADER_OK 0
+        ^
+configure:2154:6: warning: incompatible redeclaration of library function 'strchr' [-Wincompatible-library-redeclaration]
+char strchr();
+     ^
+configure:2154:6: note: 'strchr' is a builtin with type 'char *(const char *, int)'
+2 warnings generated.
+configure:2142: checking for memcpy
+configure:2170: gcc -o conftest -g -O2   conftest.c  1>&5
+In file included from configure:2147:
+./confdefs.h:15:9: warning: 'FD_HEADER_OK' macro redefined [-Wmacro-redefined]
+#define FD_HEADER_OK 1
+        ^
+./confdefs.h:12:9: note: previous definition is here
+#define FD_HEADER_OK 0
+        ^
+configure:2154:6: warning: incompatible redeclaration of library function 'memcpy' [-Wincompatible-library-redeclaration]
+char memcpy();
+     ^
+configure:2154:6: note: 'memcpy' is a builtin with type 'void *(void *, const void *, unsigned long)'
+2 warnings generated.
+configure:2197: checking for fgets
+configure:2225: gcc -o conftest -g -O2   conftest.c  1>&5
+In file included from configure:2202:
+./confdefs.h:15:9: warning: 'FD_HEADER_OK' macro redefined [-Wmacro-redefined]
+#define FD_HEADER_OK 1
+        ^
+./confdefs.h:12:9: note: previous definition is here
+#define FD_HEADER_OK 0
+        ^
+1 warning generated.
+configure:2252: checking for yylex
+configure:2280: gcc -o conftest -g -O2   conftest.c  1>&5
+In file included from configure:2257:
+./confdefs.h:15:9: warning: 'FD_HEADER_OK' macro redefined [-Wmacro-redefined]
+#define FD_HEADER_OK 1
+        ^
+./confdefs.h:12:9: note: previous definition is here
+#define FD_HEADER_OK 0
+        ^
+1 warning generated.
+Undefined symbols for architecture x86_64:
+  "_yylex", referenced from:
+      _main in conftest-7f8bd3.o
+ld: symbol(s) not found for architecture x86_64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+configure: failed program was:
+#line 2257 "configure"
+#include "confdefs.h"
+/* System header to define __stub macros and hopefully few prototypes,
+    which can conflict with char yylex(); below.  */
+#include <assert.h>
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char yylex();
+
+int main() {
+
+/* The GNU C library defines this for functions which it implements
+    to always fail with ENOSYS.  Some functions are actually named
+    something starting with __ and the normal name is an alias.  */
+#if defined (__stub_yylex) || defined (__stub___yylex)
+choke me
+#else
+yylex();
+#endif
+
+; return 0; }
+configure:2308: checking for library containing socket
+configure:2326: gcc -o conftest -g -O2   conftest.c  1>&5
+In file included from configure:2315:
+./confdefs.h:15:9: warning: 'FD_HEADER_OK' macro redefined [-Wmacro-redefined]
+#define FD_HEADER_OK 1
+        ^
+./confdefs.h:12:9: note: previous definition is here
+#define FD_HEADER_OK 0
+        ^
+1 warning generated.
+configure:2370: checking for library containing inet_addr
+configure:2388: gcc -o conftest -g -O2   conftest.c  1>&5
+In file included from configure:2377:
+./confdefs.h:15:9: warning: 'FD_HEADER_OK' macro redefined [-Wmacro-redefined]
+#define FD_HEADER_OK 1
+        ^
+./confdefs.h:12:9: note: previous definition is here
+#define FD_HEADER_OK 0
+        ^
+1 warning generated.
+configure:2444: checking whether preprocessor accepts -MM or -M
+Apple LLVM version 9.0.0 (clang-900.0.39.2)
+Target: x86_64-apple-darwin17.2.0
+Thread model: posix
+InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+ "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang" -cc1 -triple x86_64-apple-macosx10.13.0 -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Eonly -disable-free -disable-llvm-verifier -discard-value-names -main-file-name _test_.c -mrelocation-model pic -pic-level 2 -mthread-model posix -mdisable-fp-elim -fno-strict-return -masm-verbose -munwind-tables -target-cpu penryn -target-linker-version 305 -v -dwarf-column-info -debugger-tuning=lldb -resource-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0 -dependency-file - -MT _test_.o -fdebug-compilation-dir /Users/admin/gbdk/sdcc -ferror-limit 19 -fmessage-length 0 -stack-protector 1 -fblocks -fobjc-runtime=macosx-10.13.0 -fencode-extended-block-signature -fmax-type-align=16 -fdiagnostics-show-option -x c _test_.c
+clang -cc1 version 9.0.0 (clang-900.0.39.2) default target x86_64-apple-darwin17.2.0
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/local/include
+ /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include
+ /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include
+ /usr/include
+ /System/Library/Frameworks (framework directory)
+ /Library/Frameworks (framework directory)
+End of search list.
+_test_.o: _test_.c
+configure:2466: checking whether gcc accepts -ggdb
+Apple LLVM version 9.0.0 (clang-900.0.39.2)
+Target: x86_64-apple-darwin17.2.0
+Thread model: posix
+InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+ "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang" -cc1 -triple x86_64-apple-macosx10.13.0 -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name _test_.c -mrelocation-model pic -pic-level 2 -mthread-model posix -mdisable-fp-elim -fno-strict-return -masm-verbose -munwind-tables -target-cpu penryn -target-linker-version 305 -v -dwarf-column-info -debug-info-kind=standalone -dwarf-version=4 -debugger-tuning=gdb -coverage-notes-file /Users/admin/gbdk/sdcc/_test_.gcno -resource-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0 -fdebug-compilation-dir /Users/admin/gbdk/sdcc -ferror-limit 19 -fmessage-length 0 -stack-protector 1 -fblocks -fobjc-runtime=macosx-10.13.0 -fencode-extended-block-signature -fmax-type-align=16 -fdiagnostics-show-option -o _test_.o -x c _test_.c
+clang -cc1 version 9.0.0 (clang-900.0.39.2) default target x86_64-apple-darwin17.2.0
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/local/include
+ /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include
+ /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include
+ /usr/include
+ /System/Library/Frameworks (framework directory)
+ /Library/Frameworks (framework directory)
+End of search list.
+_test_.c:2:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void) {}
+^
+_test_.c:2:1: note: change return type to 'int'
+void main(void) {}
+^~~~
+int
+1 warning generated.
+configure:2491: checking whether gcc accepts -pipe
+Apple LLVM version 9.0.0 (clang-900.0.39.2)
+Target: x86_64-apple-darwin17.2.0
+Thread model: posix
+InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+ "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang" -cc1 -triple x86_64-apple-macosx10.13.0 -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name _test_.c -mrelocation-model pic -pic-level 2 -mthread-model posix -mdisable-fp-elim -fno-strict-return -masm-verbose -munwind-tables -target-cpu penryn -target-linker-version 305 -v -dwarf-column-info -debugger-tuning=lldb -coverage-notes-file /Users/admin/gbdk/sdcc/_test_.gcno -resource-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0 -fdebug-compilation-dir /Users/admin/gbdk/sdcc -ferror-limit 19 -fmessage-length 0 -stack-protector 1 -fblocks -fobjc-runtime=macosx-10.13.0 -fencode-extended-block-signature -fmax-type-align=16 -fdiagnostics-show-option -o _test_.o -x c _test_.c
+clang -cc1 version 9.0.0 (clang-900.0.39.2) default target x86_64-apple-darwin17.2.0
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/local/include
+ /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include
+ /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include
+ /usr/include
+ /System/Library/Frameworks (framework directory)
+ /Library/Frameworks (framework directory)
+End of search list.
+_test_.c:2:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void) {}
+^
+_test_.c:2:1: note: change return type to 'int'
+void main(void) {}
+^~~~
+int
+1 warning generated.
+configure:2518: checking return type of signal handlers
+configure:2540: gcc -c -ggdb -O2 -pipe  conftest.c 1>&5
+In file included from configure:2523:
+./confdefs.h:15:9: warning: 'FD_HEADER_OK' macro redefined [-Wmacro-redefined]
+#define FD_HEADER_OK 1
+        ^
+./confdefs.h:12:9: note: previous definition is here
+#define FD_HEADER_OK 0
+        ^
+1 warning generated.

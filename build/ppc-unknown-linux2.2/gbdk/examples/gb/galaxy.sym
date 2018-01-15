@@ -1,0 +1,151 @@
+; no$gmb format .sym file
+; Generated automagically by ASxxxx linker V01.75 (SDK 3.0.0)
+; Area: .  .ABS.
+00:0000 s__HEADER
+00:0000 .init
+00:0200 s__CODE
+00:1357 s__HOME
+00:1503 s__BASE
+00:16D2 s__GSINITTAIL
+00:16D2 s__LIT
+00:16D2 s__GSINIT
+00:16D3 s__GSFINAL
+00:C000 .OAM
+00:C0A0 s__DATA
+00:C0BD s__BSS
+00:C116 s__HEAP
+00:C116 s__BSEG
+00:C116 s__ISEG
+00:C116 s__XSEG
+00:C116 s__OVERLAY
+00:E000 .STACK
+00:FF80 .refresh_OAM
+; Area: _CODE
+00:0200 _fade
+00:0271 _std_data
+00:02B1 _earth_data
+00:0471 _frame_data
+00:0681 _bkg_data
+00:0951 _bkg_tiles
+00:0991 _earth_tiles
+00:099F _frame_tiles
+00:0A3F _door1_tiles
+00:0ACF _door2_tiles
+00:0B53 _door3_tiles
+00:0BD7 _door4_tiles
+00:0C5B _film
+00:0C8D _scroll
+00:0E5A _door
+00:0EEB _animate_sprite
+00:0F13 _tile_sprite
+00:0F54 _place_sprite
+00:0FA2 _main
+; Area: _HEADER
+00:01D2 _exit
+; Area: _HOME
+00:1357 .set_mode
+00:1367 .remove_VBL
+00:136D .remove_LCD
+00:1373 .remove_TIM
+00:1379 .remove_SIO
+00:137F .remove_JOY
+00:1385 .add_VBL
+00:138B .add_LCD
+00:1391 .add_TIM
+00:1397 .add_SIO
+00:139D .add_JOY
+00:13A3 .remove_int
+00:13C3 .add_int
+00:13DF .wait_vbl_done
+00:13DF _wait_vbl_done
+00:13F6 _display_off
+00:13F6 .display_off
+00:1417 .serial_IO
+00:1446 _mode
+00:144F _get_mode
+00:1454 _enable_interrupts
+00:1456 _disable_interrupts
+00:1458 _reset
+00:1458 .reset
+00:145E _set_interrupts
+00:1469 _remove_VBL
+00:1474 _remove_LCD
+00:147F _remove_TIM
+00:148A _remove_SIO
+00:1495 _remove_JOY
+00:14A0 _add_VBL
+00:14AB _add_LCD
+00:14B6 _add_TIM
+00:14C1 _add_SIO
+00:14CC _add_JOY
+00:14D7 _clock
+00:14E0 __printTStates
+00:14E1 banked_call
+00:14FA banked_ret
+; Area: _BASE
+00:1503 .set_sprite_prop
+00:1510 _set_sprite_prop
+00:151B .mv_sprite
+00:152A _move_sprite
+00:1537 _set_win_data
+00:1537 _set_bkg_data
+00:1584 _set_sprite_data
+00:15B3 _set_win_tiles
+00:15C7 .padup
+00:15C7 _waitpadup
+00:15D7 .jpad
+00:1604 .wait_pad
+00:160B _joypad
+00:1610 _waitpad
+00:161A .set_sprite_tile
+00:1627 _set_sprite_tile
+00:1632 .copy_vram
+00:1641 _get_data
+00:1641 _set_data
+00:1654 _set_bkg_tiles
+00:1668 .set_xy_wtt
+00:1679 .set_xy_btt
+00:1688 .set_xy_tt
+00:16B9 _set_tiles
+; Area: _LIT
+; Area: _GSINIT
+00:16D2 gsinit
+; Area: _GSINITTAIL
+; Area: _GSFINAL
+; Area: _DATA
+00:C0A1 _doorstate
+00:C0A2 _doorpos
+00:C0A4 _sframe
+00:C0A5 _bposx
+00:C0A7 _bposy
+00:C0A9 _bspx
+00:C0AB _bspy
+00:C0AD _wposx
+00:C0AF _wposy
+00:C0B1 _wspx
+00:C0B3 _wspy
+00:C0B5 _sposx
+00:C0B7 _sposy
+00:C0B9 _sspx
+00:C0BB _sspy
+; Area: _BSS
+00:C0BD __cpu
+00:C0BE .mode
+00:C0BF __io_out
+00:C0C0 __io_in
+00:C0C1 __io_status
+00:C0C2 .vbl_done
+00:C0C3 __current_bank
+00:C0C4 _sys_time
+00:C0C4 .sys_time
+00:C0C6 .int_0x40
+00:C0D6 .int_0x48
+00:C0E6 .int_0x50
+00:C0F6 .int_0x58
+00:C106 .int_0x60
+; Area: _HEAP
+00:C116 _malloc_heap_start
+; Area: _OVERLAY
+; Area: _ISEG
+; Area: _BSEG
+; Area: _XSEG

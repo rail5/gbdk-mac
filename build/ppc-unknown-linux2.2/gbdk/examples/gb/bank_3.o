@@ -1,0 +1,20 @@
+XL
+H A areas 3 global symbols
+M lcc193820
+S _puts Ref0000
+A _CODE size 0 flags 0
+A _DATA_3 size 2 flags 0
+S _var_3 Def0000
+A _OVERLAY size 0 flags 0
+A _ISEG size 0 flags 0
+A _BSEG size 0 flags 0
+A _XSEG size 0 flags 0
+A _GSINIT size 0 flags 0
+A _GSFINAL size 0 flags 0
+A _HOME size 1C flags 0
+S _bank_3 Def0000
+A _CODE_3 size 0 flags 0
+T 00 00 21 0A 00 E5 CD 00 00 E8 02 C9 49 27 6D 20
+R 00 00 08 00 00 03 08 00 02 07 00 00
+T 0E 00 69 6E 20 52 4F 4D 20 62 61 6E 6B 20 33 00
+R 00 00 08 00

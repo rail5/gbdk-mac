@@ -1,0 +1,214 @@
+; no$gmb format .sym file
+; Generated automagically by ASxxxx linker V01.75 (SDK 3.0.0)
+; Area: .  .ABS.
+00:0000 s__HEADER
+00:0000 .init
+00:0200 s__CODE
+00:0BD2 s__HOME
+00:10F1 s__BASE
+00:1F15 s__GSINITTAIL
+00:1F15 s__LIT
+00:1F15 s__GSINIT
+00:1F16 s__GSFINAL
+01:4000 s__CODE_1
+01:4000 s__CODE_2
+01:4000 s__CODE_3
+00:A000 s__DATA_0
+00:A000 s__DATA_1
+00:A000 s__DATA_2
+00:A000 s__DATA_3
+00:C000 .OAM
+00:C0A0 s__DATA
+00:C0A2 s__BSS
+00:C129 s__HEAP
+00:C129 s__BSEG
+00:C129 s__ISEG
+00:C129 s__XSEG
+00:C129 s__OVERLAY
+00:E000 .STACK
+00:FF80 .refresh_OAM
+; Area: _CODE
+00:0200 _print_var
+00:021F _main
+00:035F __divschar_rrx_s
+00:0366 __divschar_rrx_hds
+00:036D __modschar_rrx_s
+00:0374 __modschar_rrx_hds
+00:0379 __divsint_rrx_s
+00:0385 __divsint_rrx_hds
+00:038D __modsint_rrx_s
+00:0399 __modsint_rrx_hds
+00:039F __divuchar_rrx_s
+00:03A6 __divuchar_rrx_hds
+00:03AD __moduchar_rrx_s
+00:03B4 __moduchar_rrx_hds
+00:03B9 __divuint_rrx_s
+00:03C5 __divuint_rrx_hds
+00:03CD __moduint_rrx_s
+00:03D9 __moduint_rrx_hds
+00:03DF .mod8
+00:03DF .div8
+00:03E7 .mod16
+00:03E7 .div16
+00:0421 .modu8
+00:0421 .divu8
+00:0424 .modu16
+00:0424 .divu16
+00:0461 _putchar
+00:046A _setchar
+00:0473 _gotoxy
+00:047E _posx
+00:048F _posy
+00:04A0 .adv_gcurs
+00:04BD .circle
+00:0560 .horlin
+00:0598 .verlin
+00:05F4 .circplot
+00:0672 .box
+00:0748 .line
+00:0869 .xonly
+00:09B8 .yonly
+00:09D9 .plot
+00:09F6 .wrbyte
+00:0A78 .getpix
+00:0AAD .wrtchr
+00:0B11 _gotogxy
+00:0B1C _wrtchr
+00:0B31 _getpix
+00:0B3D _color
+00:0B4C _circle
+00:0B66 _box
+00:0B8A _line
+00:0BA2 _plot_point
+00:0BB6 _plot
+; Area: _HEADER
+00:01D2 _exit
+; Area: _HOME
+00:0BD2 .set_mode
+00:0BE2 .remove_VBL
+00:0BE8 .remove_LCD
+00:0BEE .remove_TIM
+00:0BF4 .remove_SIO
+00:0BFA .remove_JOY
+00:0C00 .add_VBL
+00:0C06 .add_LCD
+00:0C0C .add_TIM
+00:0C12 .add_SIO
+00:0C18 .add_JOY
+00:0C1E .remove_int
+00:0C3E .add_int
+00:0C5A .wait_vbl_done
+00:0C5A _wait_vbl_done
+00:0C71 _display_off
+00:0C71 .display_off
+00:0C92 .serial_IO
+00:0CC1 _mode
+00:0CCA _get_mode
+00:0CCF _enable_interrupts
+00:0CD1 _disable_interrupts
+00:0CD3 _reset
+00:0CD3 .reset
+00:0CD9 _set_interrupts
+00:0CE4 _remove_VBL
+00:0CEF _remove_LCD
+00:0CFA _remove_TIM
+00:0D05 _remove_SIO
+00:0D10 _remove_JOY
+00:0D1B _add_VBL
+00:0D26 _add_LCD
+00:0D31 _add_TIM
+00:0D3C _add_SIO
+00:0D47 _add_JOY
+00:0D52 _clock
+00:0D5B __printTStates
+00:0D5C banked_call
+00:0D75 banked_ret
+00:0D7E _bank_fixed
+00:0D99 _bank_1
+00:0DB5 _bank_2
+00:0DD1 _bank_3
+00:0DED _puts
+00:0E17 _printf
+00:0E34 _sprintf
+; Area: _BASE
+00:10F1 font_copy_uncompressed
+00:1127 font_copy_compressed
+00:117C font_load
+00:11C4 font_copy_current
+00:120C font_set
+00:1219 .put_char
+00:1232 .out_char
+00:1239 .del_char
+00:1294 _font_load
+00:12A2 _font_set
+00:12B1 _font_init
+00:12D3 _cls
+00:12D3 .cls
+00:1305 .cr_curs
+00:131A .adv_curs
+00:1376 .tmode
+00:139F .tmode_out
+00:13AF _font_load_ibm_fixed
+00:13B6 _font_ibm_fixed
+00:14B8 _font_ibm_fixed_tiles
+00:1CB8 .gmode
+00:1D1A .vbl
+00:1D25 .lcd
+00:1D32 .draw_image
+00:1D3C .switch_data
+00:1D73 _switch_data
+00:1D8E _draw_image
+00:1DA1 .y_table
+00:1EC1 .init_vram
+00:1ECF .init_wtt
+00:1EDF .init_btt
+00:1EED .init_tt
+00:1EF3 .copy_vram
+00:1F02 _get_data
+00:1F02 _set_data
+; Area: _LIT
+; Area: _GSINIT
+00:1F15 gsinit
+; Area: _GSINITTAIL
+; Area: _GSFINAL
+; Area: _DATA
+00:C0A0 _var_internal
+; Area: _BSS
+00:C0A2 __cpu
+00:C0A3 .mode
+00:C0A4 __io_out
+00:C0A5 __io_in
+00:C0A6 __io_status
+00:C0A7 .vbl_done
+00:C0A8 __current_bank
+00:C0A9 _sys_time
+00:C0A9 .sys_time
+00:C0AB .int_0x40
+00:C0BB .int_0x48
+00:C0CB .int_0x50
+00:C0DB .int_0x58
+00:C0EB .int_0x60
+00:C0FE font_current
+00:C101 font_first_free_tile
+00:C102 font_table
+00:C114 .curx
+00:C115 .cury
+00:C116 .fg_colour
+00:C117 .bg_colour
+; Area: _HEAP
+00:C129 _malloc_heap_start
+; Area: _OVERLAY
+; Area: _ISEG
+; Area: _BSEG
+; Area: _XSEG
+; Area: _DATA_0
+00:A000 _var_0
+; Area: _DATA_1
+00:A000 _var_1
+; Area: _CODE_1
+; Area: _DATA_2
+00:A000 _var_2
+; Area: _CODE_2
+; Area: _DATA_3
+00:A000 _var_3
+; Area: _CODE_3

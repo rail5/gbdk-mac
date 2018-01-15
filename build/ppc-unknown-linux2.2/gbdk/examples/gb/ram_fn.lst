@@ -1,0 +1,362 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.3.1 Mon Jan 15 17:21:30 2018
+                              4 
+                              5 ;--------------------------------------------------------
+                              6 	.module lcc193480
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _main
+                             12 	.globl _print_counter
+                             13 	.globl _inc
+                             14 	.globl _counter
+                             15 ;--------------------------------------------------------
+                             16 ; special function registers
+                             17 ;--------------------------------------------------------
+                             18 ;--------------------------------------------------------
+                             19 ; special function bits 
+                             20 ;--------------------------------------------------------
+                             21 ;--------------------------------------------------------
+                             22 ; internal ram data
+                             23 ;--------------------------------------------------------
+                             24 	.area _DATA
+   0000                      25 _counter::
+   0000                      26 	.ds 2
+                             27 ;--------------------------------------------------------
+                             28 ; overlayable items in internal ram 
+                             29 ;--------------------------------------------------------
+                             30 	.area _OVERLAY
+                             31 ;--------------------------------------------------------
+                             32 ; indirectly addressable internal ram data
+                             33 ;--------------------------------------------------------
+                             34 	.area _ISEG
+                             35 ;--------------------------------------------------------
+                             36 ; bit data
+                             37 ;--------------------------------------------------------
+                             38 	.area _BSEG
+                             39 ;--------------------------------------------------------
+                             40 ; external ram data
+                             41 ;--------------------------------------------------------
+                             42 	.area _XSEG
+                             43 ;--------------------------------------------------------
+                             44 ; global & static initialisations
+                             45 ;--------------------------------------------------------
+                             46 	.area _GSINIT
+                             47 	.area _GSFINAL
+                             48 	.area _GSINIT
+                             49 ;--------------------------------------------------------
+                             50 ; Home
+                             51 ;--------------------------------------------------------
+                             52 	.area _HOME
+                             53 	.area _CODE
+                             54 ;--------------------------------------------------------
+                             55 ; code
+                             56 ;--------------------------------------------------------
+                             57 	.area _CODE
+                             58 ;	ram_fn.c 7
+                             59 ;	genLabel
+                             60 ;	genFunction
+                             61 ;	---------------------------------
+                             62 ; Function inc
+                             63 ; ---------------------------------
+   0000                      64 ___inc_start:
+   0000                      65 _inc:
+                             66 	
+                             67 ;	ram_fn.c 9
+                             68 ;	genPlus
+                             69 ;	AOP_HL for _counter
+                             70 ;	genPlusIncr
+   0000 21 00 00             71 	ld	hl,#_counter
+   0003 34                   72 	inc	(hl)
+   0004 20 02                73 	jr	nz,00103$
+   0006 23                   74 	inc	hl
+   0007 34                   75 	inc	(hl)
+   0008                      76 00103$:
+                             77 ;	genLabel
+   0008                      78 00101$:
+                             79 ;	genEndFunction
+                             80 	
+   0008 C9                   81 	ret
+   0009                      82 ___inc_end:
+                             83 ;	ram_fn.c 12
+                             84 ;	genLabel
+                             85 ;	genFunction
+                             86 ;	---------------------------------
+                             87 ; Function print_counter
+                             88 ; ---------------------------------
+   0009                      89 ___print_counter_start:
+   0009                      90 _print_counter:
+                             91 	
+                             92 ;	ram_fn.c 14
+                             93 ;	genIpush
+                             94 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                             95 ;	AOP_HL for _counter
+   0009 21 00 00             96 	ld	hl,#_counter
+   000C 2A                   97 	ld	a,(hl+)
+   000D 66                   98 	ld	h,(hl)
+   000E 6F                   99 	ld	l,a
+   000F E5                  100 	push	hl
+                            101 ;	genIpush
+   0010 21 1A 00            102 	ld	hl,#__str_0
+   0013 E5                  103 	push	hl
+                            104 ;	genCall
+   0014 CD 00 00            105 	call	_printf
+   0017 E8 04               106 	lda	sp,4(sp)
+                            107 ;	genLabel
+   0019                     108 00101$:
+                            109 ;	genEndFunction
+                            110 	
+   0019 C9                  111 	ret
+   001A                     112 ___print_counter_end:
+   001A                     113 __str_0:
+   001A 20 43 6F 75 6E 74   114 	.ascii " Counter is %u"
+        65 72 20 69 73 20
+        25 75
+   0028 0A                  115 	.db 0x0A
+   0029 00                  116 	.db 0x00
+                            117 ;	ram_fn.c 19
+                            118 ;	genLabel
+                            119 ;	genFunction
+                            120 ;	---------------------------------
+                            121 ; Function main
+                            122 ; ---------------------------------
+   002A                     123 ___main_start:
+   002A                     124 _main:
+   002A E8 FF               125 	lda	sp,-1(sp)
+                            126 ;	ram_fn.c 32
+                            127 ;	genIpush
+                            128 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   002C 21 C4 00            129 	ld	hl,#__str_1
+   002F E5                  130 	push	hl
+                            131 ;	genCall
+   0030 CD 00 00            132 	call	_puts
+   0033 E8 02               133 	lda	sp,2(sp)
+                            134 ;	ram_fn.c 33
+                            135 ;	genAssign
+                            136 ;	AOP_HL for _counter
+   0035 21 00 00            137 	ld	hl,#_counter
+   0038 36 00               138 	ld	(hl),#0x00
+   003A 23                  139 	inc	hl
+   003B 36 00               140 	ld	(hl),#0x00
+                            141 ;	ram_fn.c 35
+                            142 ;	genMinus
+   003D 3E 09               143 	ld	a,#<___inc_end
+   003F D6 00               144 	sub	a,#<___inc_start
+   0041 4F                  145 	ld	c,a
+   0042 3E 00               146 	ld	a,#>___inc_end
+   0044 DE 00               147 	sbc	a,#>___inc_start
+   0046 47                  148 	ld	b,a
+                            149 ;	genCast
+                            150 ;	AOP_STK for _main_sloc0_1_0
+   0047 F8 00               151 	lda	hl,0(sp)
+   0049 71                  152 	ld	(hl),c
+                            153 ;	genIpush
+                            154 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   004A C5                  155 	push	bc
+                            156 ;	AOP_STK for _main_sloc0_1_0
+   004B 7E                  157 	ld	a,(hl)
+   004C F5                  158 	push	af
+   004D 33                  159 	inc	sp
+                            160 ;	genIpush
+   004E 21 00 00            161 	ld	hl,#___inc_start
+   0051 E5                  162 	push	hl
+                            163 ;	genIpush
+   0052 3E A0               164 	ld	a,#0xA0
+   0054 F5                  165 	push	af
+   0055 33                  166 	inc	sp
+                            167 ;	genCall
+   0056 CD 00 00            168 	call	_hiramcpy
+   0059 E8 04               169 	lda	sp,4(sp)
+   005B C1                  170 	pop	bc
+                            171 ;	ram_fn.c 37
+                            172 ;	genAssign
+                            173 ;	(registers are the same)
+                            174 ;	genIpush
+                            175 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   005C C5                  176 	push	bc
+                            177 ;	genIpush
+   005D 21 00 00            178 	ld	hl,#___inc_start
+   0060 E5                  179 	push	hl
+                            180 ;	genIpush
+   0061 21 00 D0            181 	ld	hl,#0xD000
+   0064 E5                  182 	push	hl
+                            183 ;	genCall
+   0065 CD 00 00            184 	call	_memcpy
+   0068 E8 06               185 	lda	sp,6(sp)
+                            186 ;	ram_fn.c 39
+                            187 ;	genCall
+                            188 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   006A CD 09 00            189 	call	_print_counter
+                            190 ;	ram_fn.c 42
+                            191 ;	genIpush
+                            192 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   006D 21 D5 00            193 	ld	hl,#__str_2
+   0070 E5                  194 	push	hl
+                            195 ;	genCall
+   0071 CD 00 00            196 	call	_puts
+   0074 E8 02               197 	lda	sp,2(sp)
+                            198 ;	ram_fn.c 43
+                            199 ;	genCall
+                            200 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0076 CD 00 00            201 	call	_inc
+                            202 ;	ram_fn.c 44
+                            203 ;	genCall
+                            204 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0079 CD 09 00            205 	call	_print_counter
+                            206 ;	ram_fn.c 47
+                            207 ;	genIpush
+                            208 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   007C 21 DE 00            209 	ld	hl,#__str_3
+   007F E5                  210 	push	hl
+                            211 ;	genCall
+   0080 CD 00 00            212 	call	_puts
+   0083 E8 02               213 	lda	sp,2(sp)
+                            214 ;	ram_fn.c 48
+                            215 ;	genCall
+                            216 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0085 CD 00 00            217 	call	_inc_ram
+                            218 ;	ram_fn.c 49
+                            219 ;	genCall
+                            220 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0088 CD 09 00            221 	call	_print_counter
+                            222 ;	ram_fn.c 52
+                            223 ;	genIpush
+                            224 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   008B 21 EE 00            225 	ld	hl,#__str_4
+   008E E5                  226 	push	hl
+                            227 ;	genCall
+   008F CD 00 00            228 	call	_puts
+   0092 E8 02               229 	lda	sp,2(sp)
+                            230 ;	ram_fn.c 53
+                            231 ;	genPcall
+                            232 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0094 CD 00 D0            233 	call	0xD000
+                            234 ;	ram_fn.c 54
+                            235 ;	genCall
+                            236 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0097 CD 09 00            237 	call	_print_counter
+                            238 ;	ram_fn.c 57
+                            239 ;	genIpush
+                            240 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   009A 21 00 01            241 	ld	hl,#__str_5
+   009D E5                  242 	push	hl
+                            243 ;	genCall
+   009E CD 00 00            244 	call	_puts
+   00A1 E8 02               245 	lda	sp,2(sp)
+                            246 ;	ram_fn.c 58
+                            247 ;	genCall
+                            248 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00A3 CD 00 00            249 	call	_inc_hiram
+                            250 ;	ram_fn.c 59
+                            251 ;	genCall
+                            252 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00A6 CD 09 00            253 	call	_print_counter
+                            254 ;	ram_fn.c 62
+                            255 ;	genIpush
+                            256 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00A9 21 12 01            257 	ld	hl,#__str_6
+   00AC E5                  258 	push	hl
+                            259 ;	genCall
+   00AD CD 00 00            260 	call	_puts
+   00B0 E8 02               261 	lda	sp,2(sp)
+                            262 ;	ram_fn.c 63
+                            263 ;	genPcall
+                            264 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00B2 CD A0 FF            265 	call	0xFFA0
+                            266 ;	ram_fn.c 64
+                            267 ;	genCall
+                            268 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00B5 CD 09 00            269 	call	_print_counter
+                            270 ;	ram_fn.c 66
+                            271 ;	genIpush
+                            272 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00B8 21 26 01            273 	ld	hl,#__str_7
+   00BB E5                  274 	push	hl
+                            275 ;	genCall
+   00BC CD 00 00            276 	call	_puts
+   00BF E8 02               277 	lda	sp,2(sp)
+                            278 ;	genLabel
+   00C1                     279 00101$:
+                            280 ;	genEndFunction
+   00C1 E8 01               281 	lda	sp,1(sp)
+   00C3 C9                  282 	ret
+   00C4                     283 ___main_end:
+   00C4                     284 __str_1:
+   00C4 50 72 6F 67 72 61   285 	.ascii "Program Start..."
+        6D 20 53 74 61 72
+        74 2E 2E 2E
+   00D4 00                  286 	.db 0x00
+   00D5                     287 __str_2:
+   00D5 43 61 6C 6C 20 52   288 	.ascii "Call ROM"
+        4F 4D
+   00DD 00                  289 	.db 0x00
+   00DE                     290 __str_3:
+   00DE 43 61 6C 6C 20 52   291 	.ascii "Call RAM direct"
+        41 4D 20 64 69 72
+        65 63 74
+   00ED 00                  292 	.db 0x00
+   00EE                     293 __str_4:
+   00EE 43 61 6C 6C 20 52   294 	.ascii "Call RAM indirect"
+        41 4D 20 69 6E 64
+        69 72 65 63 74
+   00FF 00                  295 	.db 0x00
+   0100                     296 __str_5:
+   0100 43 61 6C 6C 20 48   297 	.ascii "Call HIRAM direct"
+        49 52 41 4D 20 64
+        69 72 65 63 74
+   0111 00                  298 	.db 0x00
+   0112                     299 __str_6:
+   0112 43 61 6C 6C 20 48   300 	.ascii "Call HIRAM indirect"
+        49 52 41 4D 20 69
+        6E 64 69 72 65 63
+        74
+   0125 00                  301 	.db 0x00
+   0126                     302 __str_7:
+   0126 54 68 65 20 45 6E   303 	.ascii "The End..."
+        64 2E 2E 2E
+   0130 00                  304 	.db 0x00
+                            305 	.area _CODE
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
+
+Symbol Table
+
+  0 ___inc_end                         0009 R
+  0 ___inc_start                       0000 R
+  0 ___main_end                        00C4 R
+  0 ___main_start                      002A R
+  0 ___print_counter_end               001A R
+  0 ___print_counter_start             0009 R
+  0 __str_0                            001A R
+  0 __str_1                            00C4 R
+  0 __str_2                            00D5 R
+  0 __str_3                            00DE R
+  0 __str_4                            00EE R
+  0 __str_5                            0100 R
+  0 __str_6                            0112 R
+  0 __str_7                            0126 R
+  1 _counter                           0000 GR
+    _hiramcpy                          **** GX
+  0 _inc                               0000 GR
+    _inc_hiram                         **** GX
+    _inc_ram                           **** GX
+  0 _main                              002A GR
+    _memcpy                            **** GX
+  0 _print_counter                     0009 GR
+    _printf                            **** GX
+    _puts                              **** GX
+
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
+
+Area Table
+
+   0 _CODE                              size  131   flags 0
+   1 _DATA                              size    2   flags 0
+   2 _OVERLAY                           size    0   flags 0
+   3 _ISEG                              size    0   flags 0
+   4 _BSEG                              size    0   flags 0
+   5 _XSEG                              size    0   flags 0
+   6 _GSINIT                            size    0   flags 0
+   7 _GSFINAL                           size    0   flags 0
+   8 _HOME                              size    0   flags 0

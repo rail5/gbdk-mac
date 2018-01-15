@@ -1,0 +1,932 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.3.1 Mon Jan 15 17:21:30 2018
+                              4 
+                              5 ;--------------------------------------------------------
+                              6 	.module lcc193180
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _main
+                             12 	.globl _read_op
+                             13 	.globl _top
+                             14 	.globl _pop
+                             15 	.globl _push
+                             16 	.globl _n
+                             17 	.globl _pos
+                             18 	.globl _s
+                             19 	.globl _stack
+                             20 	.globl _sp
+                             21 ;--------------------------------------------------------
+                             22 ; special function registers
+                             23 ;--------------------------------------------------------
+                             24 ;--------------------------------------------------------
+                             25 ; special function bits 
+                             26 ;--------------------------------------------------------
+                             27 ;--------------------------------------------------------
+                             28 ; internal ram data
+                             29 ;--------------------------------------------------------
+                             30 	.area _DATA
+   0000                      31 _sp::
+   0000                      32 	.ds 1
+   0001                      33 _stack::
+   0001                      34 	.ds 80
+   0051                      35 _s::
+   0051                      36 	.ds 40
+   0079                      37 _pos::
+   0079                      38 	.ds 1
+   007A                      39 _n::
+   007A                      40 	.ds 2
+                             41 ;--------------------------------------------------------
+                             42 ; overlayable items in internal ram 
+                             43 ;--------------------------------------------------------
+                             44 	.area _OVERLAY
+                             45 ;--------------------------------------------------------
+                             46 ; indirectly addressable internal ram data
+                             47 ;--------------------------------------------------------
+                             48 	.area _ISEG
+                             49 ;--------------------------------------------------------
+                             50 ; bit data
+                             51 ;--------------------------------------------------------
+                             52 	.area _BSEG
+                             53 ;--------------------------------------------------------
+                             54 ; external ram data
+                             55 ;--------------------------------------------------------
+                             56 	.area _XSEG
+                             57 ;--------------------------------------------------------
+                             58 ; global & static initialisations
+                             59 ;--------------------------------------------------------
+                             60 	.area _GSINIT
+                             61 	.area _GSFINAL
+                             62 	.area _GSINIT
+                             63 ;--------------------------------------------------------
+                             64 ; Home
+                             65 ;--------------------------------------------------------
+                             66 	.area _HOME
+                             67 	.area _CODE
+                             68 ;--------------------------------------------------------
+                             69 ; code
+                             70 ;--------------------------------------------------------
+                             71 	.area _CODE
+                             72 ;	rpn.c 15
+                             73 ;	genLabel
+                             74 ;	genFunction
+                             75 ;	---------------------------------
+                             76 ; Function push
+                             77 ; ---------------------------------
+   0000                      78 ___push_start:
+   0000                      79 _push:
+                             80 	
+                             81 ;	rpn.c 17
+                             82 ;	genCmpLt
+                             83 ;	AOP_HL for _sp
+   0000 21 00 00             84 	ld	hl,#_sp
+   0003 7E                   85 	ld	a,(hl)
+   0004 FE 28                86 	cp	#0x28
+   0006 D2 24 00             87 	jp	nc,00102$
+                             88 ;	rpn.c 18
+                             89 ;	genAssign
+                             90 ;	AOP_HL for _sp
+   0009 4E                   91 	ld	c,(hl)
+                             92 ;	genPlus
+                             93 ;	AOP_HL for _sp
+                             94 ;	genPlusIncr
+   000A 34                   95 	inc	(hl)
+                             96 ;	genCast
+                             97 ; Removed redundent load
+   000B 06 00                98 	ld	b,#0x00
+                             99 ;	genLeftShift
+   000D CB 21               100 	sla	c
+   000F CB 10               101 	rl	b
+                            102 ;	genPlus
+                            103 ;	Can't optimise plus by inc, falling back to the normal way
+   0011 21 01 00            104 	ld	hl,#_stack
+   0014 09                  105 	add	hl,bc
+   0015 4D                  106 	ld	c,l
+   0016 44                  107 	ld	b,h
+                            108 ;	genAssign (pointer)
+                            109 ;	AOP_STK for 
+   0017 59                  110 	ld	e,c
+   0018 50                  111 	ld	d,b
+   0019 F8 02               112 	lda	hl,2(sp)
+   001B 7E                  113 	ld	a,(hl)
+   001C 12                  114 	ld	(de),a
+   001D 13                  115 	inc	de
+   001E 23                  116 	inc	hl
+   001F 7E                  117 	ld	a,(hl)
+   0020 12                  118 	ld	(de),a
+                            119 ;	genGoto
+   0021 C3 2D 00            120 	jp	00104$
+                            121 ;	genLabel
+   0024                     122 00102$:
+                            123 ;	rpn.c 20
+                            124 ;	genIpush
+                            125 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0024 21 2E 00            126 	ld	hl,#__str_0
+   0027 E5                  127 	push	hl
+                            128 ;	genCall
+   0028 CD 00 00            129 	call	_puts
+   002B E8 02               130 	lda	sp,2(sp)
+                            131 ;	genLabel
+   002D                     132 00104$:
+                            133 ;	genEndFunction
+                            134 	
+   002D C9                  135 	ret
+   002E                     136 ___push_end:
+   002E                     137 __str_0:
+   002E 53 74 61 63 6B 20   138 	.ascii "Stack full"
+        66 75 6C 6C
+   0038 00                  139 	.db 0x00
+                            140 ;	rpn.c 23
+                            141 ;	genLabel
+                            142 ;	genFunction
+                            143 ;	---------------------------------
+                            144 ; Function pop
+                            145 ; ---------------------------------
+   0039                     146 ___pop_start:
+   0039                     147 _pop:
+                            148 	
+                            149 ;	rpn.c 25
+                            150 ;	genCmpGt
+                            151 ;	AOP_HL for _sp
+   0039 3E 00               152 	ld	a,#0x00
+   003B 21 00 00            153 	ld	hl,#_sp
+   003E 96                  154 	sub	a,(hl)
+   003F D2 5C 00            155 	jp	nc,00102$
+                            156 ;	rpn.c 26
+                            157 ;	genMinus
+                            158 ;	AOP_HL for _sp
+   0042 35                  159 	dec	(hl)
+                            160 ;	genCast
+                            161 ;	AOP_HL for _sp
+   0043 4E                  162 	ld	c,(hl)
+   0044 06 00               163 	ld	b,#0x00
+                            164 ;	genLeftShift
+   0046 CB 21               165 	sla	c
+   0048 CB 10               166 	rl	b
+                            167 ;	genPlus
+                            168 ;	Can't optimise plus by inc, falling back to the normal way
+   004A 21 01 00            169 	ld	hl,#_stack
+   004D 09                  170 	add	hl,bc
+   004E 4D                  171 	ld	c,l
+   004F 44                  172 	ld	b,h
+                            173 ;	genPointerGet
+   0050 59                  174 	ld	e,c
+   0051 50                  175 	ld	d,b
+   0052 1A                  176 	ld	a,(de)
+   0053 4F                  177 	ld	c,a
+   0054 13                  178 	inc	de
+   0055 1A                  179 	ld	a,(de)
+   0056 47                  180 	ld	b,a
+                            181 ;	genRet
+   0057 59                  182 	ld	e,c
+   0058 50                  183 	ld	d,b
+   0059 C3 68 00            184 	jp	00104$
+                            185 ;	genLabel
+   005C                     186 00102$:
+                            187 ;	rpn.c 28
+                            188 ;	genIpush
+                            189 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   005C 21 69 00            190 	ld	hl,#__str_1
+   005F E5                  191 	push	hl
+                            192 ;	genCall
+   0060 CD 00 00            193 	call	_puts
+   0063 E8 02               194 	lda	sp,2(sp)
+                            195 ;	rpn.c 29
+                            196 ;	genRet
+   0065 11 00 00            197 	ld	de,#0x0000
+                            198 ;	genLabel
+   0068                     199 00104$:
+                            200 ;	genEndFunction
+                            201 	
+   0068 C9                  202 	ret
+   0069                     203 ___pop_end:
+   0069                     204 __str_1:
+   0069 53 74 61 63 6B 20   205 	.ascii "Stack empty"
+        65 6D 70 74 79
+   0074 00                  206 	.db 0x00
+                            207 ;	rpn.c 32
+                            208 ;	genLabel
+                            209 ;	genFunction
+                            210 ;	---------------------------------
+                            211 ; Function top
+                            212 ; ---------------------------------
+   0075                     213 ___top_start:
+   0075                     214 _top:
+                            215 	
+                            216 ;	rpn.c 34
+                            217 ;	genCmpGt
+                            218 ;	AOP_HL for _sp
+   0075 3E 00               219 	ld	a,#0x00
+   0077 21 00 00            220 	ld	hl,#_sp
+   007A 96                  221 	sub	a,(hl)
+   007B D2 9A 00            222 	jp	nc,00102$
+                            223 ;	rpn.c 35
+                            224 ;	genMinus
+                            225 ;	AOP_HL for _sp
+   007E 7E                  226 	ld	a,(hl)
+   007F C6 FF               227 	add	a,#0xFF
+   0081 4F                  228 	ld	c,a
+                            229 ;	genCast
+                            230 ; Removed redundent load
+   0082 06 00               231 	ld	b,#0x00
+                            232 ;	genLeftShift
+   0084 CB 21               233 	sla	c
+   0086 CB 10               234 	rl	b
+                            235 ;	genPlus
+                            236 ;	Can't optimise plus by inc, falling back to the normal way
+   0088 21 01 00            237 	ld	hl,#_stack
+   008B 09                  238 	add	hl,bc
+   008C 4D                  239 	ld	c,l
+   008D 44                  240 	ld	b,h
+                            241 ;	genPointerGet
+   008E 59                  242 	ld	e,c
+   008F 50                  243 	ld	d,b
+   0090 1A                  244 	ld	a,(de)
+   0091 4F                  245 	ld	c,a
+   0092 13                  246 	inc	de
+   0093 1A                  247 	ld	a,(de)
+   0094 47                  248 	ld	b,a
+                            249 ;	genRet
+   0095 59                  250 	ld	e,c
+   0096 50                  251 	ld	d,b
+   0097 C3 A6 00            252 	jp	00104$
+                            253 ;	genLabel
+   009A                     254 00102$:
+                            255 ;	rpn.c 37
+                            256 ;	genIpush
+                            257 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   009A 21 A7 00            258 	ld	hl,#__str_2
+   009D E5                  259 	push	hl
+                            260 ;	genCall
+   009E CD 00 00            261 	call	_puts
+   00A1 E8 02               262 	lda	sp,2(sp)
+                            263 ;	rpn.c 38
+                            264 ;	genRet
+   00A3 11 00 00            265 	ld	de,#0x0000
+                            266 ;	genLabel
+   00A6                     267 00104$:
+                            268 ;	genEndFunction
+                            269 	
+   00A6 C9                  270 	ret
+   00A7                     271 ___top_end:
+   00A7                     272 __str_2:
+   00A7 53 74 61 63 6B 20   273 	.ascii "Stack empty"
+        65 6D 70 74 79
+   00B2 00                  274 	.db 0x00
+                            275 ;	rpn.c 41
+                            276 ;	genLabel
+                            277 ;	genFunction
+                            278 ;	---------------------------------
+                            279 ; Function read_op
+                            280 ; ---------------------------------
+   00B3                     281 ___read_op_start:
+   00B3                     282 _read_op:
+   00B3 E8 FD               283 	lda	sp,-3(sp)
+                            284 ;	rpn.c 43
+                            285 ;	genCmpEq
+                            286 ;	AOP_HL for _pos
+                            287 ; genCmpEq: left 1, right 1, result 0
+   00B5 21 79 00            288 	ld	hl,#_pos
+   00B8 7E                  289 	ld	a,(hl)
+   00B9 B7                  290 	or	a,a
+   00BA C2 CB 00            291 	jp	nz,00104$
+   00BD 18 03               292 	jr	00124$
+   00BF                     293 00123$:
+   00BF C3 CB 00            294 	jp	00104$
+   00C2                     295 00124$:
+                            296 ;	rpn.c 44
+                            297 ;	genIpush
+                            298 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00C2 21 51 00            299 	ld	hl,#_s
+   00C5 E5                  300 	push	hl
+                            301 ;	genCall
+   00C6 CD 00 00            302 	call	_gets
+   00C9 E8 02               303 	lda	sp,2(sp)
+                            304 ;	rpn.c 47
+                            305 ;	genLabel
+   00CB                     306 00104$:
+                            307 ;	genPlus
+                            308 ;	AOP_HL for _pos
+                            309 ;	Can't optimise plus by inc, falling back to the normal way
+   00CB 3E 51               310 	ld	a,#<_s
+   00CD 21 79 00            311 	ld	hl,#_pos
+   00D0 86                  312 	add	a,(hl)
+   00D1 4F                  313 	ld	c,a
+   00D2 3E 00               314 	ld	a,#>_s
+   00D4 CE 00               315 	adc	a,#0x00
+   00D6 47                  316 	ld	b,a
+                            317 ;	genPointerGet
+                            318 ;	AOP_STK for _read_op_sloc0_1_0
+   00D7 0A                  319 	ld	a,(bc)
+   00D8 F8 02               320 	lda	hl,2(sp)
+                            321 ;	genCmpEq
+                            322 ;	AOP_STK for _read_op_sloc0_1_0
+                            323 ; genCmpEq: left 1, right 1, result 0
+   00DA 77                  324 	ld      (hl),a
+                            325 ; Removed redundent load
+   00DB FE 20               326 	cp	a,#0x20
+   00DD CA ED 00            327 	jp	z,00105$
+   00E0                     328 00125$:
+                            329 ;	genCmpEq
+                            330 ;	AOP_STK for _read_op_sloc0_1_0
+                            331 ; genCmpEq: left 1, right 1, result 0
+   00E0 F8 02               332 	lda	hl,2(sp)
+   00E2 7E                  333 	ld	a,(hl)
+   00E3 FE 09               334 	cp	a,#0x09
+   00E5 C2 F4 00            335 	jp	nz,00106$
+   00E8 18 03               336 	jr	00127$
+   00EA                     337 00126$:
+   00EA C3 F4 00            338 	jp	00106$
+   00ED                     339 00127$:
+                            340 ;	genLabel
+   00ED                     341 00105$:
+                            342 ;	rpn.c 48
+                            343 ;	genPlus
+                            344 ;	AOP_HL for _pos
+                            345 ;	genPlusIncr
+   00ED 21 79 00            346 	ld	hl,#_pos
+   00F0 34                  347 	inc	(hl)
+                            348 ;	genGoto
+   00F1 C3 CB 00            349 	jp	00104$
+                            350 ;	genLabel
+   00F4                     351 00106$:
+                            352 ;	rpn.c 50
+                            353 ;	genCmpEq
+                            354 ;	AOP_STK for _read_op_sloc0_1_0
+                            355 ; genCmpEq: left 1, right 1, result 0
+   00F4 F8 02               356 	lda	hl,2(sp)
+   00F6 7E                  357 	ld	a,(hl)
+   00F7 B7                  358 	or	a,a
+   00F8 C2 0A 01            359 	jp	nz,00108$
+   00FB 18 03               360 	jr	00129$
+   00FD                     361 00128$:
+   00FD C3 0A 01            362 	jp	00108$
+   0100                     363 00129$:
+                            364 ;	rpn.c 51
+                            365 ;	genAssign
+                            366 ;	AOP_HL for _pos
+   0100 21 79 00            367 	ld	hl,#_pos
+   0103 36 00               368 	ld	(hl),#0x00
+                            369 ;	rpn.c 52
+                            370 ;	genRet
+   0105 1E 0A               371 	ld	e,#0x0A
+   0107 C3 A4 01            372 	jp	00114$
+                            373 ;	genLabel
+   010A                     374 00108$:
+                            375 ;	rpn.c 55
+                            376 ;	genIpush
+                            377 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   010A C5                  378 	push	bc
+                            379 ;	AOP_STK for _read_op_sloc0_1_0
+   010B F8 04               380 	lda	hl,4(sp)
+   010D 7E                  381 	ld	a,(hl)
+   010E F5                  382 	push	af
+   010F 33                  383 	inc	sp
+                            384 ;	genCall
+   0110 CD 00 00            385 	call	_isdigit
+                            386 ;	AOP_STK for _read_op_sloc0_1_0
+   0113 F8 05               387 	lda	hl,5(sp)
+   0115 73                  388 	ld	(hl),e
+   0116 E8 01               389 	lda	sp,1(sp)
+   0118 C1                  390 	pop	bc
+                            391 ;	genIfx
+                            392 ;	AOP_STK for _read_op_sloc0_1_0
+   0119 AF                  393 	xor	a,a
+   011A F8 02               394 	lda	hl,2(sp)
+   011C B6                  395 	or	a,(hl)
+   011D C2 42 01            396 	jp	nz,00110$
+                            397 ;	rpn.c 56
+                            398 ;	genAssign
+                            399 ;	AOP_HL for _pos
+                            400 ;	AOP_STK for _read_op_sloc0_1_0
+   0120 21 79 00            401 	ld	hl,#_pos
+   0123 7E                  402 	ld	a,(hl)
+   0124 F8 02               403 	lda	hl,2(sp)
+   0126 77                  404 	ld	(hl),a
+                            405 ;	genPlus
+                            406 ;	AOP_HL for _pos
+                            407 ;	genPlusIncr
+   0127 21 79 00            408 	ld	hl,#_pos
+   012A 34                  409 	inc	(hl)
+                            410 ;	genPlus
+                            411 ;	AOP_STK for _read_op_sloc0_1_0
+                            412 ;	AOP_STK for _read_op_sloc1_1_0
+                            413 ;	Can't optimise plus by inc, falling back to the normal way
+   012B 11 51 00            414 	ld	de,#_s
+   012E F8 02               415 	lda	hl,2(sp)
+   0130 6E                  416 	ld	l,(hl)
+   0131 26 00               417 	ld	h,#0x00
+   0133 19                  418 	add	hl,de
+   0134 7D                  419 	ld	a,l
+   0135 54                  420 	ld	d,h
+   0136 F8 00               421 	lda	hl,0(sp)
+                            422 ;	genPointerGet
+                            423 ;	AOP_STK for _read_op_sloc1_1_0
+                            424 ;	AOP_STK for _read_op_sloc0_1_0
+   0138 22                  425 	ld	(hl+),a
+   0139 72                  426 	ld	(hl),d
+   013A 5F                  427 	ld	e,a
+   013B 1A                  428 	ld	a,(de)
+   013C 23                  429 	inc	hl
+                            430 ;	genRet
+                            431 ;	AOP_STK for _read_op_sloc0_1_0
+   013D 77                  432 	ld      (hl),a
+   013E 5F                  433 	ld      e,a
+   013F C3 A4 01            434 	jp	00114$
+                            435 ;	genLabel
+   0142                     436 00110$:
+                            437 ;	rpn.c 58
+                            438 ;	genPointerGet
+   0142 0A                  439 	ld	a,(bc)
+                            440 ;	genMinus
+   0143 4F                  441 	ld	c,a
+   0144 C6 D0               442 	add	a,#0xD0
+   0146 4F                  443 	ld	c,a
+                            444 ;	genCast
+                            445 ;	AOP_HL for _n
+   0147 21 7A 00            446 	ld	hl,#_n
+   014A 71                  447 	ld	(hl),c
+   014B 79                  448 	ld	a,c
+   014C 17                  449 	rla	
+   014D 9F                  450 	sbc	a,a
+   014E 23                  451 	inc	hl
+   014F 77                  452 	ld	(hl),a
+                            453 ;	rpn.c 59
+                            454 ;	genLabel
+   0150                     455 00111$:
+                            456 ;	genPlus
+                            457 ;	AOP_HL for _pos
+                            458 ;	genPlusIncr
+   0150 21 79 00            459 	ld	hl,#_pos
+   0153 34                  460 	inc	(hl)
+                            461 ;	genPlus
+                            462 ;	AOP_HL for _pos
+                            463 ;	Can't optimise plus by inc, falling back to the normal way
+   0154 3E 51               464 	ld	a,#<_s
+   0156 86                  465 	add	a,(hl)
+   0157 4F                  466 	ld	c,a
+   0158 3E 00               467 	ld	a,#>_s
+   015A CE 00               468 	adc	a,#0x00
+   015C 47                  469 	ld	b,a
+                            470 ;	genPointerGet
+                            471 ;	AOP_STK for _read_op_sloc1_1_0
+   015D 0A                  472 	ld	a,(bc)
+   015E F8 00               473 	lda	hl,0(sp)
+   0160 77                  474 	ld	(hl),a
+                            475 ;	genIpush
+                            476 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0161 C5                  477 	push	bc
+                            478 ;	AOP_STK for _read_op_sloc1_1_0
+   0162 7E                  479 	ld	a,(hl)
+   0163 F5                  480 	push	af
+   0164 33                  481 	inc	sp
+                            482 ;	genCall
+   0165 CD 00 00            483 	call	_isdigit
+                            484 ;	AOP_STK for _read_op_sloc1_1_0
+   0168 F8 03               485 	lda	hl,3(sp)
+   016A 73                  486 	ld	(hl),e
+   016B E8 01               487 	lda	sp,1(sp)
+   016D C1                  488 	pop	bc
+                            489 ;	genIfx
+                            490 ;	AOP_STK for _read_op_sloc1_1_0
+   016E AF                  491 	xor	a,a
+   016F F8 00               492 	lda	hl,0(sp)
+   0171 B6                  493 	or	a,(hl)
+   0172 CA A2 01            494 	jp	z,00113$
+                            495 ;	rpn.c 60
+                            496 ;	genMult
+                            497 ;	AOP_HL for _n
+                            498 ;	AOP_STK for _read_op_sloc1_1_0
+   0175 21 7A 00            499 	ld	hl,#_n
+   0178 5E                  500 	ld	e,(hl)
+   0179 23                  501 	inc	hl
+   017A 56                  502 	ld	d,(hl)
+   017B 6B                  503 	ld	l,e
+   017C 62                  504 	ld	h,d
+   017D 29                  505 	add	hl,hl
+   017E 29                  506 	add	hl,hl
+   017F 19                  507 	add	hl,de
+   0180 29                  508 	add	hl,hl
+   0181 7D                  509 	ld	a,l
+   0182 54                  510 	ld	d,h
+   0183 F8 00               511 	lda	hl,0(sp)
+   0185 22                  512 	ld	(hl+),a
+   0186 72                  513 	ld	(hl),d
+                            514 ;	genPointerGet
+   0187 0A                  515 	ld	a,(bc)
+                            516 ;	genCast
+                            517 ; Removed redundent load
+   0188 4F                  518 	ld	c,a
+   0189 17                  519 	rla	
+   018A 9F                  520 	sbc	a,a
+   018B 47                  521 	ld	b,a
+                            522 ;	genPlus
+                            523 ;	AOP_STK for _read_op_sloc1_1_0
+                            524 ;	Can't optimise plus by inc, falling back to the normal way
+   018C 2B                  525 	dec	hl
+   018D 2A                  526 	ld	a,(hl+)
+   018E 66                  527 	ld	h,(hl)
+   018F 6F                  528 	ld	l,a
+   0190 09                  529 	add	hl,bc
+   0191 4D                  530 	ld	c,l
+   0192 44                  531 	ld	b,h
+                            532 ;	genMinus
+                            533 ;	AOP_HL for _n
+   0193 79                  534 	ld	a,c
+   0194 C6 D0               535 	add	a,#0xD0
+   0196 21 7A 00            536 	ld	hl,#_n
+   0199 77                  537 	ld	(hl),a
+   019A 78                  538 	ld	a,b
+   019B CE FF               539 	adc	a,#0xFF
+   019D 23                  540 	inc	hl
+   019E 77                  541 	ld	(hl),a
+                            542 ;	genGoto
+   019F C3 50 01            543 	jp	00111$
+                            544 ;	genLabel
+   01A2                     545 00113$:
+                            546 ;	rpn.c 62
+                            547 ;	genRet
+   01A2 1E 30               548 	ld	e,#0x30
+                            549 ;	genLabel
+   01A4                     550 00114$:
+                            551 ;	genEndFunction
+   01A4 E8 03               552 	lda	sp,3(sp)
+   01A6 C9                  553 	ret
+   01A7                     554 ___read_op_end:
+                            555 ;	rpn.c 65
+                            556 ;	genLabel
+                            557 ;	genFunction
+                            558 ;	---------------------------------
+                            559 ; Function main
+                            560 ; ---------------------------------
+   01A7                     561 ___main_start:
+   01A7                     562 _main:
+   01A7 E8 FC               563 	lda	sp,-4(sp)
+                            564 ;	rpn.c 70
+                            565 ;	genIpush
+                            566 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   01A9 21 B5 02            567 	ld	hl,#__str_3
+   01AC E5                  568 	push	hl
+                            569 ;	genCall
+   01AD CD 00 00            570 	call	_puts
+   01B0 E8 02               571 	lda	sp,2(sp)
+                            572 ;	rpn.c 71
+                            573 ;	genAssign
+                            574 ;	AOP_HL for _sp
+   01B2 21 00 00            575 	ld	hl,#_sp
+   01B5 36 00               576 	ld	(hl),#0x00
+                            577 ;	rpn.c 72
+                            578 ;	genAssign
+                            579 ;	AOP_HL for _pos
+   01B7 21 79 00            580 	ld	hl,#_pos
+   01BA 36 00               581 	ld	(hl),#0x00
+                            582 ;	rpn.c 74
+                            583 ;	genLabel
+   01BC                     584 00111$:
+                            585 ;	genCall
+                            586 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   01BC CD B3 00            587 	call	_read_op
+   01BF 4B                  588 	ld	c,e
+                            589 ;	genAssign
+   01C0 41                  590 	ld	b,c
+                            591 ;	genCmpEq
+                            592 ; genCmpEq: left 1, right 1, result 0
+   01C1 79                  593 	ld	a,c
+   01C2 B7                  594 	or	a,a
+   01C3 CA B2 02            595 	jp	z,00114$
+   01C6                     596 00125$:
+                            597 ;	rpn.c 75
+                            598 ;	genCmpEq
+                            599 ; genCmpEq: left 1, right 1, result 0
+   01C6 78                  600 	ld	a,b
+   01C7 FE 0A               601 	cp	a,#0x0A
+   01C9 CA A0 02            602 	jp	z,00109$
+   01CC                     603 00126$:
+                            604 ;	genCmpEq
+                            605 ; genCmpEq: left 1, right 1, result 0
+   01CC 78                  606 	ld	a,b
+   01CD FE 2A               607 	cp	a,#0x2A
+   01CF CA 1E 02            608 	jp	z,00103$
+   01D2                     609 00127$:
+                            610 ;	genCmpEq
+                            611 ; genCmpEq: left 1, right 1, result 0
+   01D2 78                  612 	ld	a,b
+   01D3 FE 2B               613 	cp	a,#0x2B
+   01D5 CA FE 01            614 	jp	z,00102$
+   01D8                     615 00128$:
+                            616 ;	genCmpEq
+                            617 ; genCmpEq: left 1, right 1, result 0
+   01D8 78                  618 	ld	a,b
+   01D9 FE 2D               619 	cp	a,#0x2D
+   01DB CA 44 02            620 	jp	z,00104$
+   01DE                     621 00129$:
+                            622 ;	genCmpEq
+                            623 ; genCmpEq: left 1, right 1, result 0
+   01DE 78                  624 	ld	a,b
+   01DF FE 2F               625 	cp	a,#0x2F
+   01E1 CA 68 02            626 	jp	z,00105$
+   01E4                     627 00130$:
+                            628 ;	genCmpEq
+                            629 ; genCmpEq: left 1, right 1, result 0
+   01E4 78                  630 	ld	a,b
+   01E5 FE 30               631 	cp	a,#0x30
+   01E7 C2 BC 01            632 	jp	nz,00111$
+   01EA 18 03               633 	jr	00132$
+   01EC                     634 00131$:
+   01EC C3 BC 01            635 	jp	00111$
+   01EF                     636 00132$:
+                            637 ;	rpn.c 77
+                            638 ;	genIpush
+                            639 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                            640 ;	AOP_HL for _n
+   01EF 21 7A 00            641 	ld	hl,#_n
+   01F2 2A                  642 	ld	a,(hl+)
+   01F3 66                  643 	ld	h,(hl)
+   01F4 6F                  644 	ld	l,a
+   01F5 E5                  645 	push	hl
+                            646 ;	genCall
+   01F6 CD 00 00            647 	call	_push
+   01F9 E8 02               648 	lda	sp,2(sp)
+                            649 ;	rpn.c 78
+                            650 ;	genGoto
+   01FB C3 BC 01            651 	jp	00111$
+                            652 ;	rpn.c 80
+                            653 ;	genLabel
+   01FE                     654 00102$:
+                            655 ;	genCall
+                            656 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   01FE CD 39 00            657 	call	_pop
+   0201 42                  658 	ld	b,d
+   0202 4B                  659 	ld	c,e
+                            660 ;	genCall
+                            661 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0203 C5                  662 	push	bc
+   0204 CD 39 00            663 	call	_pop
+                            664 ;	AOP_STK for _main_sloc0_1_0
+   0207 F8 03               665 	lda	hl,3(sp)
+   0209 72                  666 	ld	(hl),d
+   020A 2B                  667 	dec	hl
+   020B 73                  668 	ld	(hl),e
+   020C C1                  669 	pop	bc
+                            670 ;	genPlus
+                            671 ;	AOP_STK for _main_sloc0_1_0
+                            672 ;	Can't optimise plus by inc, falling back to the normal way
+   020D F8 00               673 	lda	hl,0(sp)
+   020F 2A                  674 	ld	a,(hl+)
+   0210 66                  675 	ld	h,(hl)
+   0211 6F                  676 	ld	l,a
+   0212 09                  677 	add	hl,bc
+   0213 4D                  678 	ld	c,l
+   0214 44                  679 	ld	b,h
+                            680 ;	genIpush
+                            681 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0215 C5                  682 	push	bc
+                            683 ;	genCall
+   0216 CD 00 00            684 	call	_push
+   0219 E8 02               685 	lda	sp,2(sp)
+                            686 ;	rpn.c 81
+                            687 ;	genGoto
+   021B C3 BC 01            688 	jp	00111$
+                            689 ;	rpn.c 83
+                            690 ;	genLabel
+   021E                     691 00103$:
+                            692 ;	genCall
+                            693 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   021E CD 39 00            694 	call	_pop
+   0221 42                  695 	ld	b,d
+   0222 4B                  696 	ld	c,e
+                            697 ;	genCall
+                            698 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0223 C5                  699 	push	bc
+   0224 CD 39 00            700 	call	_pop
+                            701 ;	AOP_STK for _main_sloc0_1_0
+   0227 F8 03               702 	lda	hl,3(sp)
+   0229 72                  703 	ld	(hl),d
+   022A 2B                  704 	dec	hl
+   022B 73                  705 	ld	(hl),e
+   022C C1                  706 	pop	bc
+                            707 ;	genIpush
+                            708 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                            709 ;	AOP_STK for _main_sloc0_1_0
+   022D F8 00               710 	lda	hl,0(sp)
+   022F 2A                  711 	ld	a,(hl+)
+   0230 66                  712 	ld	h,(hl)
+   0231 6F                  713 	ld	l,a
+   0232 E5                  714 	push	hl
+                            715 ;	genIpush
+   0233 C5                  716 	push	bc
+                            717 ;	genCall
+   0234 CD 00 00            718 	call	__mulsint_rrx_s
+   0237 42                  719 	ld	b,d
+   0238 4B                  720 	ld	c,e
+   0239 E8 04               721 	lda	sp,4(sp)
+                            722 ;	genIpush
+                            723 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   023B C5                  724 	push	bc
+                            725 ;	genCall
+   023C CD 00 00            726 	call	_push
+   023F E8 02               727 	lda	sp,2(sp)
+                            728 ;	rpn.c 84
+                            729 ;	genGoto
+   0241 C3 BC 01            730 	jp	00111$
+                            731 ;	rpn.c 86
+                            732 ;	genLabel
+   0244                     733 00104$:
+                            734 ;	genCall
+                            735 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0244 CD 39 00            736 	call	_pop
+   0247 42                  737 	ld	b,d
+   0248 4B                  738 	ld	c,e
+                            739 ;	genAssign
+                            740 ;	AOP_STK for _main_op2_1_1
+   0249 F8 02               741 	lda	hl,2(sp)
+   024B 71                  742 	ld	(hl),c
+   024C 23                  743 	inc	hl
+   024D 70                  744 	ld	(hl),b
+                            745 ;	rpn.c 87
+                            746 ;	genCall
+                            747 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   024E CD 39 00            748 	call	_pop
+   0251 42                  749 	ld	b,d
+   0252 4B                  750 	ld	c,e
+                            751 ;	genMinus
+                            752 ;	AOP_STK for _main_op2_1_1
+                            753 ; Removed redundent load
+                            754 ; Removed redundent load
+   0253 F8 02               755 	lda	hl,2(sp)
+   0255 5E                  756 	ld	e,(hl)
+   0256 23                  757 	inc	hl
+   0257 56                  758 	ld	d,(hl)
+   0258 79                  759 	ld	a,c
+   0259 93                  760 	sub	a,e
+   025A 5F                  761 	ld	e,a
+   025B 78                  762 	ld	a,b
+   025C 9A                  763 	sbc	a,d
+   025D 47                  764 	ld	b,a
+   025E 4B                  765 	ld	c,e
+                            766 ;	genIpush
+                            767 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   025F C5                  768 	push	bc
+                            769 ;	genCall
+   0260 CD 00 00            770 	call	_push
+   0263 E8 02               771 	lda	sp,2(sp)
+                            772 ;	rpn.c 88
+                            773 ;	genGoto
+   0265 C3 BC 01            774 	jp	00111$
+                            775 ;	rpn.c 90
+                            776 ;	genLabel
+   0268                     777 00105$:
+                            778 ;	genCall
+                            779 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0268 CD 39 00            780 	call	_pop
+   026B 42                  781 	ld	b,d
+   026C 4B                  782 	ld	c,e
+                            783 ;	genAssign
+                            784 ;	AOP_STK for _main_op2_1_1
+   026D F8 02               785 	lda	hl,2(sp)
+   026F 71                  786 	ld	(hl),c
+   0270 23                  787 	inc	hl
+   0271 70                  788 	ld	(hl),b
+                            789 ;	rpn.c 91
+                            790 ;	genCmpEq
+                            791 ;	AOP_STK for _main_op2_1_1
+                            792 ; genCmpEq: left 2, right 2, result 0
+   0272 2B                  793 	dec	hl
+   0273 2A                  794 	ld	a,(hl+)
+   0274 B6                  795 	or	a,(hl)
+   0275 CA 94 02            796 	jp	z,00107$
+   0278                     797 00133$:
+                            798 ;	rpn.c 92
+                            799 ;	genCall
+                            800 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0278 CD 39 00            801 	call	_pop
+   027B 42                  802 	ld	b,d
+   027C 4B                  803 	ld	c,e
+                            804 ;	genIpush
+                            805 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                            806 ;	AOP_STK for _main_op2_1_1
+   027D F8 02               807 	lda	hl,2(sp)
+   027F 2A                  808 	ld	a,(hl+)
+   0280 66                  809 	ld	h,(hl)
+   0281 6F                  810 	ld	l,a
+   0282 E5                  811 	push	hl
+                            812 ;	genIpush
+   0283 C5                  813 	push	bc
+                            814 ;	genCall
+   0284 CD 00 00            815 	call	__divsint_rrx_s
+   0287 42                  816 	ld	b,d
+   0288 4B                  817 	ld	c,e
+   0289 E8 04               818 	lda	sp,4(sp)
+                            819 ;	genIpush
+                            820 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   028B C5                  821 	push	bc
+                            822 ;	genCall
+   028C CD 00 00            823 	call	_push
+   028F E8 02               824 	lda	sp,2(sp)
+                            825 ;	genGoto
+   0291 C3 BC 01            826 	jp	00111$
+                            827 ;	genLabel
+   0294                     828 00107$:
+                            829 ;	rpn.c 94
+                            830 ;	genIpush
+                            831 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0294 21 C4 02            832 	ld	hl,#__str_4
+   0297 E5                  833 	push	hl
+                            834 ;	genCall
+   0298 CD 00 00            835 	call	_puts
+   029B E8 02               836 	lda	sp,2(sp)
+                            837 ;	rpn.c 95
+                            838 ;	genGoto
+   029D C3 BC 01            839 	jp	00111$
+                            840 ;	rpn.c 97
+                            841 ;	genLabel
+   02A0                     842 00109$:
+                            843 ;	genCall
+                            844 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   02A0 CD 75 00            845 	call	_top
+   02A3 42                  846 	ld	b,d
+   02A4 4B                  847 	ld	c,e
+                            848 ;	genIpush
+                            849 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   02A5 C5                  850 	push	bc
+                            851 ;	genIpush
+   02A6 21 D0 02            852 	ld	hl,#__str_5
+   02A9 E5                  853 	push	hl
+                            854 ;	genCall
+   02AA CD 00 00            855 	call	_printf
+   02AD E8 04               856 	lda	sp,4(sp)
+                            857 ;	rpn.c 99
+                            858 ;	genGoto
+   02AF C3 BC 01            859 	jp	00111$
+                            860 ;	genLabel
+   02B2                     861 00114$:
+                            862 ;	genEndFunction
+   02B2 E8 04               863 	lda	sp,4(sp)
+   02B4 C9                  864 	ret
+   02B5                     865 ___main_end:
+   02B5                     866 __str_3:
+   02B5 52 50 4E 20 43 61   867 	.ascii "RPN Calculator"
+        6C 63 75 6C 61 74
+        6F 72
+   02C3 00                  868 	.db 0x00
+   02C4                     869 __str_4:
+   02C4 44 69 76 69 64 65   870 	.ascii "Divide by 0"
+        20 62 79 20 30
+   02CF 00                  871 	.db 0x00
+   02D0                     872 __str_5:
+   02D0 3D 3D 3E 20 25 64   873 	.ascii "==> %d"
+   02D6 0A                  874 	.db 0x0A
+   02D7 00                  875 	.db 0x00
+                            876 	.area _CODE
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
+
+Symbol Table
+
+  0 ___main_end                        02B5 R
+  0 ___main_start                      01A7 R
+  0 ___pop_end                         0069 R
+  0 ___pop_start                       0039 R
+  0 ___push_end                        002E R
+  0 ___push_start                      0000 R
+  0 ___read_op_end                     01A7 R
+  0 ___read_op_start                   00B3 R
+  0 ___top_end                         00A7 R
+  0 ___top_start                       0075 R
+    __divsint_rrx_s                    **** GX
+    __mulsint_rrx_s                    **** GX
+  0 __str_0                            002E R
+  0 __str_1                            0069 R
+  0 __str_2                            00A7 R
+  0 __str_3                            02B5 R
+  0 __str_4                            02C4 R
+  0 __str_5                            02D0 R
+    _gets                              **** GX
+    _isdigit                           **** GX
+  0 _main                              01A7 GR
+  1 _n                                 007A GR
+  0 _pop                               0039 GR
+  1 _pos                               0079 GR
+    _printf                            **** GX
+  0 _push                              0000 GR
+    _puts                              **** GX
+  0 _read_op                           00B3 GR
+  1 _s                                 0051 GR
+  1 _sp                                0000 GR
+  1 _stack                             0001 GR
+  0 _top                               0075 GR
+
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
+
+Area Table
+
+   0 _CODE                              size  2D8   flags 0
+   1 _DATA                              size   7C   flags 0
+   2 _OVERLAY                           size    0   flags 0
+   3 _ISEG                              size    0   flags 0
+   4 _BSEG                              size    0   flags 0
+   5 _XSEG                              size    0   flags 0
+   6 _GSINIT                            size    0   flags 0
+   7 _GSFINAL                           size    0   flags 0
+   8 _HOME                              size    0   flags 0
